@@ -4,8 +4,11 @@ gem 'rails', '3.2.3'
 
 gem 'sqlite3'
 
+gem 'birthday'
+gem 'country_select'
 gem 'hashrocket-rails'
 gem 'jquery-rails'
+gem 'simple_form'
 gem 'sorcery'
 
 group :assets do
