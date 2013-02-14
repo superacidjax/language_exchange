@@ -1,0 +1,44 @@
+%header.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      - unless current_user
+
+        = link_to 'Language Board', root_path, :class => 'brand'
+      %nav
+        %ul.nav
+
+          %li
+            = link_to 'About us', '#'
+          %li#fat-menu.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Select Language
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                English
+              %li
+                = link_to 'Edit Settings', '#'
+              %li.divider
+              %li
+          - if current_user
+            %li#fat-menu.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                My Account
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  = current_user.email
+                %li
+                  = link_to 'Edit Settings', '#'
+                %li.divider
+                %li
+                  = link_to 'Logout', sign_out_path
+          - else
+            %li
+              = link_to "Sign up", signup_path
+            %li
+              = link_to "Sign in", login_path
+
+          / %form.navbar-form.pull-right.form-search
+          /   %input.input-medium.search-query{:type => "text"}
+          /   %i.icon-search
