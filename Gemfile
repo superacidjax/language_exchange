@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 ruby "1.9.3"
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.12'
 
 gem 'pg'
 
 gem 'birthday'
 gem 'country_select'
 gem 'hashrocket-rails'
-gem 'jquery-rails'
+gem "jquery-rails"
 gem 'simple_form'
 gem 'sorcery'
 
@@ -24,5 +24,6 @@ group :production do
 end
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'sqlite3'
 end
