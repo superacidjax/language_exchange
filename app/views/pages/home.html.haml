@@ -2,4 +2,31 @@
   %h1 Welcome to Language Board!
   %h2
     This is the home page.
-  = link_to "Sign up now!", new_user_path, class: "btn btn-large btn-primary"
+  %a.btn.btn-large.btn-success{"data-toggle" => "modal", :href => "#signupModal", :role => "button"} Sign up now!
+  %a.btn.btn-large.btn-primary{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Sign in
+
+#container
+  - users.each do |user|
+    .element
+      %p.number
+        I speak English
+      %p.pull-right
+        I am learning German
+      %h3.symbol
+        = user.first_name
+      %p
+        I live in #{user.city}, #{user.country}
+
+#myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Sign in
+  .modal-body
+    = render 'sessions/new'
+
+#signupModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "signupLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Sign in
+  .modal-body
+    = render 'users/new'

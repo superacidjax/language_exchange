@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
+
+  expose(:users)
+  expose(:user)
+
   def home
   end
 
