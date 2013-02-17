@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title [TITLE]
+    = stylesheet_link_tag    'application', 'style'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = yield :head
+  %body
+    = render 'layouts/sign_in_header'
+    .container
+      = render 'flashes'
+      = yield
+    %hr
+    = render 'layouts/footer'

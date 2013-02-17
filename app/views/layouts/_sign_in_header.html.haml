@@ -1,0 +1,14 @@
+%header.navbar.navbar-fixed-top
+  .container
+    = link_to 'Language Board', root_path, :class => 'brand'
+    %nav
+      %ul.nav.pull-right
+        %li#fat-menu.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Select Language
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              = link_to 'English', '#'
+            %li
+              = link_to 'German', '#'
