@@ -4,8 +4,14 @@
 
 html
   overflow-y: scroll
+  color: #3f3d32
+  a
+    color: #3f3d32
+  a:hover
+    text-decoration: none
 
 body
+  background-color: #FAFAFA
   padding-top: 60px
 
 section
@@ -57,3 +63,67 @@ p
   &:hover
     color: #fff
     text-decoration: none
+
+.hero-unit
+  background-color: #EEE5DE
+
+#container
+.thumbnails
+  li
+    -moz-border-radius: 1.4em
+    -ms-border-radius: 1.4em
+    -o-border-radius: 1.4em
+    -webkit-border-radius: 1.4em
+    border-radius: 1.4em
+    background-image: url("/assets/cork-board.jpg")
+.thumbnail
+  border: none
+.noteboard
+  background-color: #fff
+  opacity: .8
+  h3
+    text-align: center
+  p
+    padding-left: 10px
+footer
+  width: 90%
+  z-index: 9999
+  padding: 0
+  ul.navigation
+    float: right
+    margin: auto
+    font-family: helvetica, sans-serif
+    font-weight: 100
+    font-style: normal
+    padding-top: 12px
+    li
+      display: block
+      float: left
+      a
+        color: #3f3d32
+        border: .1em groove transparent
+        -moz-border-radius: 1.4em
+        -ms-border-radius: 1.4em
+        -o-border-radius: 1.4em
+        -webkit-border-radius: 1.4em
+        border-radius: 1.4em
+        font-size: 1.3em
+        padding: 6px 20px
+        text-shadow: 1px 1px 1px #E5E5E5
+        text-transform: lowercase
+        -webkit-transition: all 0.4s ease
+        -moz-transition: all 0.4s ease
+        -o-transition: all 0.4s ease
+        transition: all 0.4s ease
+        vertical-align: middle
+        text-decoration: none
+      a:hover
+        border: .1em solid #e5e5e5
+        background-color: #ffffff
+        background-image: -moz-linear-gradient(top, #ffffff, #f7f7f7)
+        background-image: -ms-linear-gradient(top, #ffffff, #f7f7f7)
+        background-image: -o-linear-gradient(top, #ffffff, #f7f7f7)
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f7f7f7))
+        background-image: -webkit-linear-gradient(top, #ffffff, #f7f7f7)
+        background-image: linear-gradient(top, #ffffff, #f7f7f7)
+        text-decoration: none
