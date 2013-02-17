@@ -1,36 +1,31 @@
 %header.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      - unless current_user
-
-        = link_to 'Language Board', root_path, :class => 'brand'
-      %nav
-        %ul.nav
-
-          %li
-            = link_to 'About us', '#'
+  .container
+    = link_to 'Language Board', root_path, :class => 'brand'
+    %nav
+      %ul.nav.pull-right
+        %li#fat-menu.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Select Language
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              = link_to 'English', '#'
+            %li
+              = link_to 'German', '#'
+        %li
+          - unless current_user
+            %a.btn-link{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Sign in
+        - if current_user
           %li#fat-menu.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Select Language
+              My Account
               %b.caret
             %ul.dropdown-menu
               %li
-                English
+                = current_user.first_name
               %li
-                = link_to 'Edit Settings', '#'
+                = link_to 'Edit Settings', edit_user_path(current_user)
               %li.divider
               %li
-          - if current_user
-            %li#fat-menu.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                My Account
-                %b.caret
-              %ul.dropdown-menu
-                %li
-                  = current_user.email
-                %li
-                  = link_to 'Edit Settings', '#'
-                %li.divider
-                %li
-                  = link_to 'Logout', sign_out_path
-          - else
+                = link_to 'Logout', sign_out_path
+        - else
