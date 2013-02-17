@@ -1,2 +1,97 @@
-%h1 Users#edit
-%p Find me in app/views/users/edit.html.haml
+%h1
+  Set up your profile
+.form
+  = simple_form_for user do |f|
+    - if user.errors.any?
+      .error_messages
+        %ul
+          - for message in user.errors.full_messages
+            %li= message
+    %h2
+      #{user.first_name} #{user.last_name}
+    %hr
+    .field
+      = f.label :photo
+      = f.file_field :photo
+    %br
+    .field
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Languages I speak
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a#chkA.multicheck.checked{:href => "#"}
+              English
+              %span.pull-right
+          %li
+            %a#chkB.multicheck{:href => "#"}
+              German
+              %span.icon-ok.pull-right
+          %li
+            %a#chkC.multicheck{:href => "#"}
+              Spanish
+              %span.icon-ok.pull-right
+          %li
+            %a#chkD.multicheck{:href => "#"}
+              French
+              %span.icon-ok.pull-right
+          .clearfix
+      %br
+      .field
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Languages I want to learn
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a#chkA.multicheck{:href => "#"}
+              English
+              %span.pull-right
+          %li
+            %a#chkB.multicheck{:href => "#"}
+              German
+              %span.icon-ok.pull-right
+          %li
+            %a#chkC.multicheck{:href => "#"}
+              Spanish
+              %span.icon-ok.pull-right
+          %li
+            %a#chkD.multicheck{:href => "#"}
+              French
+              %span.icon-ok.pull-right
+          .clearfix
+      %br
+    .field
+      = f.label :city
+      = f.text_field :city
+    .field
+      = f.input :country
+    .field
+      = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
+    / .field
+    /   = f.input :lang_spoken, as: :select, collection: ['English', 'German'], item_wrapper_class: 'inline', label: "What language do you speak?"
+    / .field
+    / = f.input :lang_learning, as: :select, collection: ['German', 'English'], item_wrapper_class: 'inline'
+    %br
+    .field
+      = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
+                              order: [:day, :month, :year]
+    .field
+      = f.label :bio, "About Me"
+      = f.text_area :bio, rows: 10
+    .field
+      = f.label :imessage, "iMessage Username"
+      = f.text_field :imessage
+    .field
+      = f.label :skype, "Skype Username"
+      = f.text_field :skype
+    .field
+      = f.label :facebook, "Facebook URL"
+      = f.text_field :facebook
+    .field
+      = f.label :msn, "MSN Username"
+      = f.text_field :msn
+    .actions.center
+      = f.submit "Save", class: 'btn btn-success'
+      = link_to "Go Back"

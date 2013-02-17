@@ -1,2 +1,20 @@
-%h1 Users#show
-%p Find me in app/views/users/show.html.haml
+%h1
+  View profile
+.well.span12
+  .img-polaroid.span2
+    = image_tag(user.photo_url(:profile))
+  %h3
+    = user_name(user)
+  %h4
+    #{user.city}, #{user.country}
+  %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+
+#contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Send a message to #{user_name(user)}
+  .modal-body
+    There will be a message contact box here. If the user doesn't have an account,
+    they'll be prompted to sign up.
+  .modal-footer
+    %a.btn.btn-primary{:href => "#"} Send Message
