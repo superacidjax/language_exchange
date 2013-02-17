@@ -6,9 +6,12 @@ gem 'rails', '3.2.12'
 gem 'pg'
 
 gem 'birthday'
+gem 'carrierwave'
 gem 'country_select'
+gem 'fog'
 gem 'hashrocket-rails'
-gem "jquery-rails"
+gem 'jquery-rails'
+gem 'mini_magick'
 gem 'simple_form'
 gem 'sorcery'
 

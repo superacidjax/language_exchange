@@ -11,6 +11,11 @@ class User < ActiveRecord::Base
 
   acts_as_birthday :birthday
 
-  attr_accessible :birthday, :bio, :city, :country, :days_available, :email, :facebook, :first_name, :gender, :imessage, :lang_learning, :lang_spoken, :last_name, :msn, :skype, :password, :password_confirmation
+  attr_accessible :birthday, :photo, :bio, :city, :country, :days_available,
+                  :email, :facebook, :first_name, :gender, :imessage,
+                  :lang_learning, :lang_spoken, :last_name, :msn, :skype,
+                  :password, :password_confirmation
   # serialize :lang_learning, :lang_spoken, :days_available
+
+  mount_uploader :photo, PhotoUploader
 end
