@@ -1,2 +1,48 @@
-%h1 Users#index
-%p Find me in app/views/users/index.html.haml
+.center.hero-unit
+  %h1 Find a great language partner
+  %br
+  %h3
+    I want to learn
+  #langfinder
+    = search_form_for @search do |f|
+      = f.text_field :languages_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+      = f.submit "Find a partner now!", class: "btn btn-success"
+  / %a.btn.btn-large.btn-success{"data-toggle" => "modal", :href => "#signupModal", :role => "button"} Sign up now!
+
+#container
+  %ul.thumbnails
+    - @users.each do |user|
+      %li.span3
+
+        %a.thumbnail{href: user_path(user)}
+          %img
+            = image_tag(user.photo_url(:small).to_s, class: 'img-polaroid')
+          .noteboard
+            %h3
+              = user_name(user)
+            %p
+              I speak
+              - user.languages.each do |language|
+                %p
+                  = language.name
+            %p
+              I am learning
+              - user.language_to_learns.each do |language|
+                %p
+                  = language.name
+            %p
+              I live in #{user.city}, #{user.country}
+
+#myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Sign in
+  .modal-body
+    = render 'sessions/new'
+
+#signupModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "signupLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Sign up
+  .modal-body
+    = render 'users/new'

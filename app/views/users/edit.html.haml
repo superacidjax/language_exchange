@@ -1,97 +1,68 @@
-%h1
-  Set up your profile
-.form
-  = simple_form_for user do |f|
-    - if user.errors.any?
-      .error_messages
-        %ul
-          - for message in user.errors.full_messages
-            %li= message
-    %h2
-      #{user.first_name} #{user.last_name}
-    %hr
-    .field
-      = f.label :photo
-      = f.file_field :photo
-    %br
-    .field
-      %li.dropdown
-        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-          Languages I speak
-          %b.caret
-        %ul.dropdown-menu
-          %li
-            %a#chkA.multicheck.checked{:href => "#"}
-              English
-              %span.pull-right
-          %li
-            %a#chkB.multicheck{:href => "#"}
-              German
-              %span.icon-ok.pull-right
-          %li
-            %a#chkC.multicheck{:href => "#"}
-              Spanish
-              %span.icon-ok.pull-right
-          %li
-            %a#chkD.multicheck{:href => "#"}
-              French
-              %span.icon-ok.pull-right
-          .clearfix
-      %br
-      .field
-      %li.dropdown
-        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-          Languages I want to learn
-          %b.caret
-        %ul.dropdown-menu
-          %li
-            %a#chkA.multicheck{:href => "#"}
-              English
-              %span.pull-right
-          %li
-            %a#chkB.multicheck{:href => "#"}
-              German
-              %span.icon-ok.pull-right
-          %li
-            %a#chkC.multicheck{:href => "#"}
-              Spanish
-              %span.icon-ok.pull-right
-          %li
-            %a#chkD.multicheck{:href => "#"}
-              French
-              %span.icon-ok.pull-right
-          .clearfix
-      %br
-    .field
-      = f.label :city
-      = f.text_field :city
-    .field
-      = f.input :country
-    .field
-      = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
-    / .field
-    /   = f.input :lang_spoken, as: :select, collection: ['English', 'German'], item_wrapper_class: 'inline', label: "What language do you speak?"
-    / .field
-    / = f.input :lang_learning, as: :select, collection: ['German', 'English'], item_wrapper_class: 'inline'
-    %br
-    .field
-      = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
-                              order: [:day, :month, :year]
-    .field
-      = f.label :bio, "About Me"
-      = f.text_area :bio, rows: 10
-    .field
-      = f.label :imessage, "iMessage Username"
-      = f.text_field :imessage
-    .field
-      = f.label :skype, "Skype Username"
-      = f.text_field :skype
-    .field
-      = f.label :facebook, "Facebook URL"
-      = f.text_field :facebook
-    .field
-      = f.label :msn, "MSN Username"
-      = f.text_field :msn
-    .actions.center
-      = f.submit "Save", class: 'btn btn-success'
-      = link_to "Go Back"
+= simple_form_for user do |f|
+  - if user.errors.any?
+    .error_messages
+      %h2 Form is invalid
+      %ul
+        - for message in user.errors.full_messages
+          %li= message
+  .field
+    = f.label :first_name
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    = f.text_field :last_name
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :city
+    = f.text_field :city
+  .field
+    = f.input :country
+    / TODO: set country priorities
+  .field
+    = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
+  %h2
+    Languages I know
+  #iknow.languages
+    - user.languages.build
+    = f.simple_fields_for :languages do |language|
+      = render 'language_fields', :f => language
+    .links
+      = link_to_add_association 'add another language', f, :languages
+  %br
+  %h2
+    Languages I want to learn
+  #iwanttoknow.languages
+    - user.language_to_learns.build
+    = f.simple_fields_for :language_to_learns do |language|
+      = render 'language_to_learn_fields', :f => language
+    .links
+      = link_to_add_association 'add another language', f, :language_to_learns
+  %br
+  .field
+    = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
+                            order: [:day, :month, :year]
+  .field
+    = f.label :bio, "About Me"
+    = f.text_area :bio, rows: 10
+  .field
+    = f.label :imessage, "iMessage Username/Email"
+    = f.text_field :imessage
+  .field
+    = f.label :skype, "Skype Username"
+    = f.text_field :skype
+  .field
+    = f.label :facebook, "Facebook URL"
+    = f.text_field :facebook
+  .field
+    = f.label :msn, "MSN Username"
+    = f.text_field :msn
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .actions
+    = f.submit "Sign up", class: 'btn btn-success'

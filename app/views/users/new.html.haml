@@ -22,59 +22,24 @@
     / TODO: set country priorities
   .field
     = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
-  / .field
-  /   = f.input :lang_spoken, as: :select, collection: ['English', 'German'], item_wrapper_class: 'inline', label: "What language do you speak?"
-  / .field
-  / = f.input :lang_learning, as: :select, collection: ['German', 'English'], item_wrapper_class: 'inline'
+  %h2
+    Languages I know
+  #iknow.languages
+    - user.languages.build
+    = f.simple_fields_for :languages do |language|
+      = render 'language_fields', :f => language
+    .links
+      = link_to_add_association 'add another language', f, :languages
   %br
-  .field
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-        Languages I speak
-        %b.caret
-      %ul.dropdown-menu
-        %li
-          %a#chkA.multicheck.checked{:href => "#"}
-            English
-            %span.pull-right
-        %li
-          %a#chkB.multicheck{:href => "#"}
-            German
-            %span.icon-ok.pull-right
-        %li
-          %a#chkC.multicheck{:href => "#"}
-            Spanish
-            %span.icon-ok.pull-right
-        %li
-          %a#chkD.multicheck{:href => "#"}
-            French
-            %span.icon-ok.pull-right
-        .clearfix
-    %br
-    .field
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-        Languages I want to learn
-        %b.caret
-      %ul.dropdown-menu
-        %li
-          %a#chkA.multicheck{:href => "#"}
-            English
-            %span.pull-right
-        %li
-          %a#chkB.multicheck{:href => "#"}
-            German
-            %span.icon-ok.pull-right
-        %li
-          %a#chkC.multicheck{:href => "#"}
-            Spanish
-            %span.icon-ok.pull-right
-        %li
-          %a#chkD.multicheck{:href => "#"}
-            French
-            %span.icon-ok.pull-right
-        .clearfix
-    %br
+  %h2
+    Languages I want to learn
+  #iwanttoknow.languages
+    - user.language_to_learns.build
+    = f.simple_fields_for :language_to_learns do |language|
+      = render 'language_to_learn_fields', :f => language
+    .links
+      = link_to_add_association 'add another language', f, :language_to_learns
+  %br
   .field
     = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
                             order: [:day, :month, :year]
@@ -93,9 +58,6 @@
   .field
     = f.label :msn, "MSN Username"
     = f.text_field :msn
-  .field
-    = f.label :email
-    = f.text_field :email
   .field
     = f.label :password
     = f.password_field :password

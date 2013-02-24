@@ -7,11 +7,13 @@ gem 'pg'
 
 gem 'birthday'
 gem 'carrierwave'
+gem 'cocoon'
 gem 'country_select'
 gem 'fog'
 gem 'hashrocket-rails'
 gem 'jquery-rails'
 gem 'mini_magick'
+gem 'ransack'
 gem 'simple_form'
 gem 'sorcery'
 
@@ -23,10 +25,9 @@ group :assets do
 end
 
 group :production do
-  gem 'pg'
 end
 
 group :development, :test do
+  gem 'pry-debugger'
   gem 'pry-rails'
-  gem 'sqlite3'
 end

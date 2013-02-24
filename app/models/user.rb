@@ -14,8 +14,18 @@ class User < ActiveRecord::Base
   attr_accessible :birthday, :photo, :bio, :city, :country, :days_available,
                   :email, :facebook, :first_name, :gender, :imessage,
                   :lang_learning, :lang_spoken, :last_name, :msn, :skype,
-                  :password, :password_confirmation
+                  :password, :password_confirmation, :languages_attributes,
+                  :language_to_learns_attributes
   # serialize :lang_learning, :lang_spoken, :days_available
 
+  has_many :languages
+  accepts_nested_attributes_for :languages, reject_if: :all_blank,
+                                allow_destroy: true
+
+  has_many :language_to_learns
+  accepts_nested_attributes_for :language_to_learns, reject_if: :all_blank,
+                                allow_destroy: true
+
   mount_uploader :photo, PhotoUploader
+
 end

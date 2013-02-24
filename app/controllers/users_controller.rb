@@ -4,12 +4,18 @@ class UsersController < ApplicationController
   before_filter :the_right_user,  only: [:edit, :update, :destroy]
   expose(:user)
   expose(:users)
+  expose(:autocomplete_items) { LanguageListing.order(:name).map(&:name) }
+
+  def index
+    @search = User.search(params[:q])
+    @users = @search.result(distinct: true)
+  end
 
 
   def create
     if user.save
       auto_login(user)
-      redirect_to edit_user_path(user), :notice => "Your account has been created!"
+      redirect_to user, :notice => "Your account has been created!"
     else
       render :new
     end
