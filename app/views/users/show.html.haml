@@ -7,6 +7,16 @@
     = user_name(user)
   %h4
     #{user.city}, #{user.country}
+  %h4
+    I speak
+  %p
+    - user.languages.each do |language|
+      = language.name
+  %h4
+    I want to learn
+  %p
+    - user.language_to_learns.each do |language|
+      = language.name
   %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
 
 #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
