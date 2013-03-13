@@ -1,4 +1,4 @@
 class LanguageToLearn < ActiveRecord::Base
-  attr_accessible :name, :reading_level, :speaking_level, :user_id, :writing_level
+  attr_accessible :name, :level, :user_id
   belongs_to :user
 end

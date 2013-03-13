@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223232926) do
+ActiveRecord::Schema.define(:version => 20130313171245) do
 
   create_table "language_listings", :force => true do |t|
     t.string   "name"
@@ -23,22 +23,17 @@ ActiveRecord::Schema.define(:version => 20130223232926) do
 
   create_table "language_to_learns", :force => true do |t|
     t.string   "name"
-    t.integer  "speaking_level"
-    t.integer  "reading_level"
-    t.integer  "writing_level"
     t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "level"
   end
 
   create_table "languages", :force => true do |t|
     t.string   "name"
-    t.integer  "speaking_level"
-    t.integer  "reading_level"
-    t.integer  "writing_level"
     t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
