@@ -1,0 +1,12 @@
+- if current_user
+  %h3
+    We're sorry!
+  %p
+    Unfortunately no results were found. We are just getting set up so check
+    back soon!
+- else
+  %h3
+    We're sorry!
+  %p
+    Unfortunately no results were found. We are just getting set up so
+    #{link_to "Sign up", '#'} and create your own posting so others can find you!

@@ -51,3 +51,6 @@
     %h3#myModalLabel Sign up
   .modal-body
     = render 'users/new'
+
+- if @users.blank?
+  = render 'users/no_results'
