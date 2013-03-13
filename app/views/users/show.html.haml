@@ -1,5 +1,8 @@
 %h1
-  View profile
+  #{user_name(current_user)}'s Profile
+%p
+  - if current_user == user
+    = link_to "Edit my Profile", edit_user_path(user)
 .well.span12
   .img-polaroid.span2
     = image_tag(user.photo_url(:profile))

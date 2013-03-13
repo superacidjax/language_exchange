@@ -1,3 +1,7 @@
+%h1
+  Profile Settings
+%p
+  = link_to "Return to home page", root_path
 = simple_form_for user do |f|
   - if user.errors.any?
     .error_messages
@@ -5,6 +9,9 @@
       %ul
         - for message in user.errors.full_messages
           %li= message
+  .field
+    = f.label :photo
+    = f.file_field :photo
   .field
     = f.label :first_name
     = f.text_field :first_name
@@ -32,7 +39,7 @@
       = link_to_add_association 'add another language', f, :languages
   %br
   %h2
-    Languages I want to learn
+    Languages I am learning
   #iwanttoknow.languages
     - user.language_to_learns.build
     = f.simple_fields_for :language_to_learns do |language|
