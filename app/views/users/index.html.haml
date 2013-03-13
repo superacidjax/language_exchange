@@ -5,7 +5,12 @@
     I want to learn
   #langfinder
     = search_form_for @search do |f|
+      = f.label :languages_name_cont, "I am learning"
       = f.text_field :languages_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+      %br
+      = f.label :language_to_learns_name_cont, "I speak"
+      = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+      %br
       = f.submit "Find a partner now!", class: "btn btn-success"
   / %a.btn.btn-large.btn-success{"data-toggle" => "modal", :href => "#signupModal", :role => "button"} Sign up now!
 
