@@ -65,4 +65,6 @@
     = f.label :password_confirmation
     = f.password_field :password_confirmation
   .actions
-    = f.submit "Sign up", class: 'btn btn-success'
+    = f.submit "Update", class: 'btn btn-success'
+  %p
+    = link_to "Delete my profile", user, method: :delete, data: { confirm: 'Are you sure?' }

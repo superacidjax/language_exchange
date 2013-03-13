@@ -29,6 +29,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if user.delete
+      redirect_to root_path, :notice => "Your account has been deleted!"
+    else
+      render :edit
+    end
+  end
+
   private
 
     def the_right_user
