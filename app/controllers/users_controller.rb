@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
-  before_filter :require_login, only: [:update, :destroy]
+  respond_to :html, :json
+
+  before_filter :require_login, only: [:edit, :update, :destroy,
+                                      :following, :followers]
   before_filter :the_right_user,  only: [:edit, :update, :destroy]
+
+
   expose(:user)
   expose(:users)
   expose(:autocomplete_items) { LanguageListing.order(:name).map(&:name) }
@@ -10,7 +15,6 @@ class UsersController < ApplicationController
     @search = User.search(params[:q])
     @users = @search.result(distinct: true)
   end
-
 
   def create
     if user.save
@@ -35,6 +39,18 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def following
+    @title = "Following"
+    @users = user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @users = user.followers.paginate(page: params[:page])
+    render 'show_follow'
   end
 
   private

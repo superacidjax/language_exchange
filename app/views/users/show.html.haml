@@ -1,8 +1,8 @@
 %h1
-  #{user_name(current_user)}'s Profile
+  #{user_name(user)}'s Profile
 %p
   - if current_user == user
-    = link_to "Edit my Profile", edit_user_path(user)
+    = render 'users/stats'
 .well.span12
   .img-polaroid.span2
     = image_tag(user.photo_url(:profile))
@@ -20,14 +20,16 @@
   %p
     - user.language_to_learns.each do |language|
       = language.name
-  %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+    = render 'follow_form' if logged_in?
 
-#contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Send a message to #{user_name(user)}
-  .modal-body
-    There will be a message contact box here. If the user doesn't have an account,
-    they'll be prompted to sign up.
-  .modal-footer
-    %a.btn.btn-primary{:href => "#"} Send Message
+    %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+
+  #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel Send a message to #{user_name(user)}
+    .modal-body
+      There will be a message contact box here. If the user doesn't have an account,
+      they'll be prompted to sign up.
+    .modal-footer
+      %a.btn.btn-primary{:href => "#"} Send Message

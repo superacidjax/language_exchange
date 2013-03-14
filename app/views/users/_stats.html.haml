@@ -1,0 +1,6 @@
+- user ||= current_user
+.stats
+  %a{:href => following_user_path(user)}
+    %strong#following.stat
+      %p
+        #{pluralize(user.followed_users.count, "user")} on my short list

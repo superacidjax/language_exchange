@@ -4,10 +4,14 @@ LanguageExchange::Application.routes.draw do
   get "sign_in" => "sessions#new", :as => "sign_in"
   get "sign_up" => "users#new", :as => "sign_up"
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :sessions
   resources :pages
-
+  resources :relationships, only: [:create, :destroy]
 
   match '/ui(/:action)', controller: 'ui'
 

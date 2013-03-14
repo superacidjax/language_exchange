@@ -1,0 +1,9 @@
+%h1
+  My Short List
+.row
+  %aside.span4
+    %section
+      - unless @users.empty?
+        .user_avatars
+          - @users.each do |user|
+            = link_to user_name(user), user
