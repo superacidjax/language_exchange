@@ -15,6 +15,7 @@ gem 'mini_magick'
 gem 'ransack'
 gem 'simple_form'
 gem 'sorcery'
+gem 'turbolinks'
 gem 'will_paginate'
 
 group :assets do
