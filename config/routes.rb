@@ -13,6 +13,10 @@ LanguageExchange::Application.routes.draw do
   resources :pages
   resources :relationships, only: [:create, :destroy]
 
+  match 'privacy', to: 'pages#privacy', as: :privacy
+  match 'about', to: 'pages#about', as: :about
+  match 'terms-of-service', to: 'pages#terms_of_service', as: :terms
+
   match '/ui(/:action)', controller: 'ui'
 
   root to: 'users#index'
