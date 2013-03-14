@@ -1,8 +1,6 @@
 .center.hero-unit
   %h1 Find a great language partner
   %br
-  %h3
-    I want to learn
   #langfinder
     = search_form_for @search do |f|
       = f.label :languages_name_cont, "I am learning"
