@@ -22,7 +22,8 @@
       = language.name
     = render 'follow_form' if logged_in?
 
-    %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+    - unless current_user == user
+      %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
 
   #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-header

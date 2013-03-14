@@ -22,7 +22,8 @@
                   = language.name
             %p
               I live in #{user.city}, #{user.country}
-        %a.btn.btn-large.btn-success.center{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+        - unless current_user == user
+          %a.btn.btn-large.btn-success.center{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
 
       #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
         .modal-header
