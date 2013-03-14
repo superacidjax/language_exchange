@@ -13,6 +13,9 @@
             %li
               = link_to 'German', '#'
         %li
+          - if current_user
+            = link_to "My Short List", following_user_path(current_user)
+        %li
           - unless current_user
             = link_to "Sign up", new_user_path
         %li
