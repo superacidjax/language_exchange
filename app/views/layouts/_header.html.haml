@@ -14,7 +14,11 @@
               = link_to 'German', '#'
         %li
           - unless current_user
-            %a.btn-link{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Sign in
+            = link_to "Sign up", new_user_path
+        %li
+          - unless current_user
+            = link_to "Sign in", sign_in_path
+            / %a.btn-link{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Sign in
         - if current_user
           %li#fat-menu.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
