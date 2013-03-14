@@ -1,9 +1,35 @@
 %h1
   My Short List
-.row
-  %aside.span4
-    %section
-      - unless @users.empty?
-        .user_avatars
-          - @users.each do |user|
-            = link_to user_name(user), user
+- unless @users.empty?
+  %ul.thumbnails
+    - @users.each do |user|
+      %li.span3
+        %a.thumbnail{href: user_path(user)}
+          %img
+            = image_tag(user.photo_url(:small).to_s, class: 'img-polaroid')
+          .noteboard
+            %h3
+              = user_name(user)
+            %p
+              I speak
+              - user.languages.each do |language|
+                %p
+                  = language.name
+            %p
+              I am learning
+              - user.language_to_learns.each do |language|
+                %p
+                  = language.name
+            %p
+              I live in #{user.city}, #{user.country}
+        %a.btn.btn-large.btn-success.center{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+
+      #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          %h3#myModalLabel Send a message to #{user_name(user)}
+        .modal-body
+          There will be a message contact box here. If the user doesn't have an account,
+          they'll be prompted to sign up.
+        .modal-footer
+          %a.btn.btn-primary{:href => "#"} Send Message
