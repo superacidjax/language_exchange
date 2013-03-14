@@ -30,4 +30,5 @@ end
 group :development, :test do
   gem 'pry-debugger'
   gem 'pry-rails'
+  gem 'rails-erd'
 end
