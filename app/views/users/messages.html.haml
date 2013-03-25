@@ -1,0 +1,22 @@
+%h1
+  My Messages
+%h2
+  Received Messages
+- if @received_messages.blank?
+  %h3
+    No messages
+%ul
+  - if @received_messages
+    - @received_messages.each do |m|
+      %li
+        = m.body
+%h2
+  Sent Messages
+%ul
+  - if @sent_messages
+    - @sent_messages.each do |m|
+      %li
+        Sent by:
+        = user_name(m.sender)
+      %li
+        = m.body

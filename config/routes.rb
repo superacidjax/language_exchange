@@ -14,8 +14,10 @@ LanguageExchange::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   match 'privacy', to: 'pages#privacy', as: :privacy
+  match 'messages', to: 'users#messages', as: :user_messages
   match 'about', to: 'pages#about', as: :about
   match 'terms-of-service', to: 'pages#terms_of_service', as: :terms
+  post '/send_message' => 'users#send_message'
 
   match '/ui(/:action)', controller: 'ui'
 

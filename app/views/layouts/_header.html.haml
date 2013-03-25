@@ -16,6 +16,12 @@
           - if current_user
             = link_to "My Short List", following_user_path(current_user)
         %li
+          - if current_user
+            - if current_user.unread_messages?
+              = link_to "New Messages!", user_messages_path(current_user)
+            - else
+              = link_to "My Messages", user_messages_path(current_user)
+        %li
           - unless current_user
             = link_to "Sign up", new_user_path
         %li

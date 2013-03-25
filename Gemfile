@@ -16,6 +16,7 @@ gem 'ransack'
 gem 'simple_form'
 gem 'sorcery'
 gem 'turbolinks'
+gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 gem 'will_paginate'
 
 group :assets do
