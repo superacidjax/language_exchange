@@ -1,6 +1,7 @@
 .span12.postit
   %h1
-    find a partner
+    find a conversation partner
+  %hr
   #langfinder
     = search_form_for @search, url: user_search_path do |f|
       .span3
@@ -13,7 +14,7 @@
       .span3
         %p
           = f.label :meets_face_to_face_true, "I want to meet face to face"
-          / = f.check_box :meets_face_to_face_true
+          = f.check_box :meets_face_to_face_true
         %p
           = f.label :meets_online_true, "I want to meet online"
           = f.check_box :meets_online_true
@@ -22,8 +23,7 @@
           = f.check_box :meets_telephone_true
       .span3
         %p
-          near
-          = label_tag "City, Country"
+          near (City, Country)
           = text_field_tag :location, params[:location]
 
         %br
