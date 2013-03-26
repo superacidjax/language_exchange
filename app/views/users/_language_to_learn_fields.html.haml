@@ -1,7 +1,7 @@
 .nested-fields
   = f.text_field :name, :class=>"lang_search", data: { autocomplete_source: autocomplete_items }, placeholder: "enter language"
   %br
-  = f.label :level, "Level"
-  = f.collection_radio_buttons :level, [[1, 'Beginner'], [2, 'Intermediate'], [3, 'Expert']], :first, :last
+    .inline
+      = f.collection_radio_buttons :level, [[1, 'Beginner'], [2, 'Intermediate'], [3, 'Expert']], :first, :last, item_wrapper_class: 'inline'
   %br
   = link_to_remove_association "remove language", f
