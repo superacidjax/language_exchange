@@ -18,9 +18,9 @@
         %li
           - if current_user
             - if current_user.unread_messages?
-              = link_to "New Messages!", user_messages_path(current_user)
+              = link_to "New Messages!", messages_path
             - else
-              = link_to "My Messages", user_messages_path(current_user)
+              = link_to "My Messages", messages_path
         %li
           - unless current_user
             = link_to "Sign up", new_user_path
