@@ -2,6 +2,9 @@
 
 /* universal
 
+html, body
+  height: 100%
+
 html
   color: #3f3d32
   font-family: 'PT Sans', Helvetica, Arial, sans-serif
@@ -17,14 +20,25 @@ html
   background-size: cover
 
 body
-  padding-top: 60px
   background: transparent
+
+.face2face
+  background: url(f2f_icon.png) no-repeat center center fixed
+
+#wrap
+  min-height: 100%
+  height: auto
+  height: 100%
+  margin: 0 auto -43px
 
 section
   overflow: auto
 
 textarea
   resize: vertical
+
+.headline
+  margin-top: 99px
 
 .center
   text-align: center
@@ -191,18 +205,19 @@ ul.ui-autocomplete
   strong
     display: block
 
+#push, #footer
+  height: 43px
+
+
 footer
   background: url("crush_paper.jpg") repeat-x
-  z-index: 9999
-  padding: 0
   p
     margin-left: 18px
-    padding-bottom: 9px
+    padding-bottom: 18px
   ul.navigation
     float: right
-    margin: auto
-    padding-top: 12px
     li
+      padding-top: 9px
       display: block
       float: left
       a

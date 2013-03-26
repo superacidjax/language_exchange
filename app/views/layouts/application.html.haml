@@ -8,8 +8,14 @@
     = yield :head
     = render 'layouts/fonts'
   %body
-    = render 'layouts/header'
-    .container
-      = render 'flashes'
-      = yield
-    = render 'layouts/footer'
+    #wrap
+      = render 'layouts/header'
+      .container
+        .headline
+          = render 'flashes'
+          = yield
+    #push
+    #footer
+      .clearfix
+      %footer
+        = render 'layouts/footer'
