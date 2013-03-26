@@ -1,2 +1,24 @@
-%h1 Messages#show
-%p Find me in app/views/messages/show.html.haml
+%h1
+  Message from #{user_name(message.sender)}
+%h3
+  = message.subject
+%p
+  Message sent #{distance_of_time_in_words(message.created_at, Time.now)} ago
+%p
+  = message.body
+%a.btn.btn-success{"data-toggle" => "modal", :href => "#replyModal", :role => "button"} Reply to #{user_name(message.sender)}
+
+#replyModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Send a message to #{user_name(message.sender)}
+  .modal-body
+    = form_tag '/send_message' do
+      = hidden_field_tag :user, message.sender.id
+      = hidden_field_tag :sender, current_user.id
+      = label_tag :subject
+      = text_field_tag :subject, reply_subject
+      = label_tag :message
+      = text_area_tag :message
+      %hr
+      = submit_tag "Send Message", class: 'btn btn-success'
