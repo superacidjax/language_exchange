@@ -32,6 +32,26 @@ class UsersController < ApplicationController
       end
     else
     end
+    unless params[:min_age].blank? && params[:max_age].blank?
+      @rightage = []
+      @onlineusers.each do |u|
+        if (u.birthday_age <= params[:max_age].to_i)
+          if (u.birthday_age >= params[:min_age].to_i)
+            @rightage << u
+          else
+          end
+        else
+        end
+      end
+    else
+      # Task.find(:all, :conditions => ["complete=? and priority IS ?", false, nil])
+    end
+    if !@rightage.blank?
+      @newresults = @rightage & @users
+      @onlineusers = @rightage & @onlineusers
+    else
+    end
+
   end
 
   def search_params

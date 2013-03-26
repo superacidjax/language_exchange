@@ -29,7 +29,7 @@
         %h4
           Between
         %p
-          #{f.text_field :age_gteq, id: 'ages'} and #{f.text_field :age_lteq, id: 'ages'} years old
+          #{text_field_tag :min_age, params[:min_age], id: 'ages'} and #{text_field_tag :max_age, params[:max_age], id: 'ages'} years old
 
         %h4
           Near (City, Country)
