@@ -18,7 +18,8 @@
         %li
           - if current_user
             - if current_user.unread_messages?
-              = link_to "New Messages!", messages_path
+              %span.badge.badge-success.noblue
+                #{link_to (pluralize(current_user.unread_message_count, 'unread message')), messages_path}
             - else
               = link_to "My Messages", messages_path
         %li
