@@ -44,6 +44,16 @@ class User < ActiveRecord::Base
 
   mount_uploader :photo, PhotoUploader
 
+  scope :age_between, lambda{|from_age, to_age|
+    if from_age.present? and to_age.present?
+      where( :birthday =>  (Date.today - to_age.to_i.year)..(Date.today - from_age.to_i.year) )
+    end
+  }
+
+  ransacker :age, :formatter => proc {|v| Date.today - v.to_i.year} do |parent|
+  parent.table[:birthday]
+  end
+
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end
