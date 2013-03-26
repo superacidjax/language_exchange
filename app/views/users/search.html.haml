@@ -54,6 +54,8 @@
           I live in #{user.city}, #{user.country}
   - else
     - if @onlineusers
+      - if @onlineusers.blank?
+        = render 'users/no_results'
       - unless params[:location].blank?
         %h2
           We couldn't find any users near you, however here are users that are interested in online or telephone meetups.
@@ -63,7 +65,6 @@
             %a.thumbnail{href: user_path(user)}
               %img
                 = image_tag(user.photo_url(:small).to_s, class: 'img-rounded')
-
           %li
             = link_to user_name(user), user
           %li
