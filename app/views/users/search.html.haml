@@ -5,25 +5,34 @@
   #langfinder
     = search_form_for @search, url: user_search_path do |f|
       .span3
+        %h4
+          I am learning..
         %p
-          = f.label :languages_name_cont, "I am learning"
           = f.text_field :languages_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+        %h4
+          I speak..
         %p
-          = f.label :language_to_learns_name_cont, "I speak"
           = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
       .span3
+        %h4
+          I want to meet..
         %p
-          = f.label :meets_face_to_face_true, "I want to meet face to face"
+          #{image_tag('f2f_icon.png')} Face to Face
           = f.check_box :meets_face_to_face_true
         %p
-          = f.label :meets_online_true, "I want to meet online"
+          #{image_tag('video-chat.png')} Online
           = f.check_box :meets_online_true
         %p
-          = f.label :meets_telephone, "I want to meet over the phone"
+          #{image_tag('telephone-icon.png')} Telephone
           = f.check_box :meets_telephone_true
       .span3
+        %h4
+          Between
         %p
-          near (City, Country)
+          #{f.text_field :age_gteq, id: 'ages'} and #{f.text_field :age_lteq, id: 'ages'} years old
+
+        %h4
+          Near (City, Country)
           = text_field_tag :location, params[:location]
 
         %br
