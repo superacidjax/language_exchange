@@ -69,8 +69,9 @@
         .postit
           = render 'users/no_results'
       - unless params[:location].blank? && !@onlineusers.blank?
-        %h2
-          We couldn't find any users near you, however here are users that are interested in online or telephone meetups.
+        .postit
+          %h2
+            We couldn't find any users near you, however here are users that are interested in online or telephone meetups.
       - @onlineusers.each do |user|
         %ul.thumbnails.span3
           %li
