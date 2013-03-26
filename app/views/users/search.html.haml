@@ -1,4 +1,4 @@
-.span12.postit
+.postit
   %h1
     find a conversation partner
   %hr
@@ -28,6 +28,8 @@
 
         %br
         = f.submit "Find a partner now!", class: "btn btn-success"
+  .clearfix
+.tapeline
 .listingcontainer
   - if @newresults && @newresults != []
     - @newresults.each do |user|
@@ -55,7 +57,8 @@
   - else
     - if @onlineusers
       - if @onlineusers.blank?
-        = render 'users/no_results'
+        .postit
+          = render 'users/no_results'
       - unless params[:location].blank?
         %h2
           We couldn't find any users near you, however here are users that are interested in online or telephone meetups.
