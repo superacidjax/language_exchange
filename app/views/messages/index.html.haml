@@ -1,65 +1,78 @@
-%h1
-  My Messages
-%h2
-  Received Messages
-- if @received_messages.blank?
-  %h3
-    No messages
-- if @received_messages
-  %table.table-bordered.table-hover.table-striped.span12
-    %thead
-      %tr
-        %th.span1 Opened
-        %th.span1 Date
-        %th.span1 From
-        %th.span1 Subject
-        %th.span1
-    %tbody
-      %td
-        - @received_messages.each do |m|
+.row
+  %h1
+    My Messages
+  - if @received_messages.blank?
+    %h3
+      No messages
+  - else
+    %h4
+      %a#viewin
+        .icon-plus
+        open inbox
+      %a#hidein
+        .icon-minus
+        close inbox
+    #inbox
+      %table.table-bordered.table-hover.table-striped.span12
+        %thead
           %tr
-            %td
-              - if m.read_at?
-                #{distance_of_time_in_words(m.read_at, Time.now)} ago.
-              - else
-                Unread
-            %td
-              #{distance_of_time_in_words(m.created_at, Time.now)} ago
-            %td
-              = user_name(m.sender)
-            %td
-              = link_to m.subject, m
-            %td
-              = link_to "Delete", '#'
-
-%h2
-  Sent Messages
-- if @received_messages.blank?
-  %h3
-    No messages
-- if @sent_messages
-  %table.table-bordered.table-hover.table-striped.span12
-    %thead
-      %tr
-        %th.span1 Opened
-        %th.span1 Date
-        %th.span1 To
-        %th.span1 Subject
-        %th.span1
-    %tbody
-      %td
-        - @sent_messages.each do |m|
+            %th.span1 Opened
+            %th.span1 Received
+            %th.span1 From
+            %th.span1 Subject
+            %th.span1
+        %tbody
+          %td
+            - @received_messages.each do |m|
+              %tr
+                %td
+                  - if m.read_at?
+                    #{distance_of_time_in_words(m.read_at, Time.now)} ago.
+                  - else
+                    Unread
+                %td
+                  #{distance_of_time_in_words(m.created_at, Time.now)} ago
+                %td
+                  = user_name(m.sender)
+                %td
+                  = link_to m.subject, m
+                %td
+                  = link_to "Delete", '#'
+.row
+  - if @received_messages.blank?
+    %h3
+      No messages
+  - else
+    %h4
+      %a#viewout
+        .icon-plus
+        open outbox
+      %a#hideout
+        .icon-minus
+        close outbox
+    #outbox
+      %table.table-bordered.table-hover.table-striped.span12
+        %thead
           %tr
-            %td
-              - if m.read_at?
-                #{distance_of_time_in_words(m.read_at, Time.now)} ago.
-              - else
-                Unread
-            %td
-              #{distance_of_time_in_words(m.created_at, Time.now)} ago
-            %td
-              = user_name(m.recipient)
-            %td
-              = link_to m.subject, m
-            %td
-              = link_to "Unsend", '#'
+            %th.span1 Opened
+            %th.span1 Sent
+            %th.span1 To
+            %th.span1 Subject
+            %th.span1
+        %tbody
+          %td
+            - @sent_messages.each do |m|
+              %tr
+                %td
+                  - if m.read_at?
+                    #{distance_of_time_in_words(m.read_at, Time.now)} ago.
+                  - else
+                    Unread
+                %td
+                  #{distance_of_time_in_words(m.created_at, Time.now)} ago
+                %td
+                  = link_to user_name(m.recipient), user_path(m.recipient)
+                %td
+                  = link_to m.subject, m
+                %td
+                  = link_to "Unsend", '#'
