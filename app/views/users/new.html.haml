@@ -1,59 +1,82 @@
-= simple_form_for user do |f|
-  - if user.errors.any?
-    .error_messages
-      %h2 Form is invalid
-      %ul
-        - for message in user.errors.full_messages
-          %li= message
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :city
-    = f.text_field :city
-  .field
-    = f.input :country
-    / TODO: set country priorities
-  .field
-    = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
-  %h2
-    Languages I know
-  #iknow.languages
-    - user.languages.build
-    = f.simple_fields_for :languages do |language|
-      = render 'language_fields', :f => language
-    .links
-      = link_to_add_association 'add another language', f, :languages
-  %br
-  %h2
-    Languages I am learning
-  #iwanttoknow.languages
-    - user.language_to_learns.build
-    = f.simple_fields_for :language_to_learns do |language|
-      = render 'language_to_learn_fields', :f => language
-    .links
-      = link_to_add_association 'add another language', f, :language_to_learns
-  %br
-  .field
-    = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
-                            order: [:day, :month, :year]
-  .field
-    = f.label :bio, "About Me"
-    = f.text_area :bio, rows: 10
-  .field
-    = f.label :skype, "Skype Username"
-    = f.text_field :skype
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit "Sign up", class: 'btn btn-success'
+.postit
+  %h1
+    Sign up for a free profile
+  = simple_form_for user do |f|
+    - if user.errors.any?
+      .error_messages
+        %h2 Form is invalid
+        %ul
+          - for message in user.errors.full_messages
+            %li= message
+    .field
+      = f.label :first_name
+      = f.text_field :first_name
+    .field
+      = f.label :last_name
+      = f.text_field :last_name
+    .field
+      = f.label :email
+      = f.text_field :email
+    .field
+      = f.label :city
+      = f.text_field :city
+    .field
+      = f.input :country
+      / TODO: set country priorities
+    .field
+      = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
+    %hr
+    %h3
+      Languages I know
+    #iknow
+      - user.languages.build
+      = f.simple_fields_for :languages do |language|
+        = render 'language_fields', :f => language
+      .links
+        = link_to_add_association 'add another language', f, :languages
+    %hr
+    %h3
+      Languages I am learning
+    #iwanttoknow
+      - user.language_to_learns.build
+      = f.simple_fields_for :language_to_learns do |language|
+        = render 'language_to_learn_fields', :f => language
+      .links
+        = link_to_add_association 'add another language', f, :language_to_learns
+    %hr
+    .field
+      = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
+                              order: [:day, :month, :year]
+    .field
+      = f.label :bio, "About Me"
+      = f.text_area :bio, rows: 10
+    .field
+      = f.label :photo
+      = f.file_field :photo
+    %hr
+    %h3
+      How I'd be interested in meeting
+    .field
+      %p
+        #{image_tag('f2f_icon.png')} Face to Face
+        = f.check_box :meets_face_to_face
+    .field
+      %p
+        #{image_tag('video-chat.png')} Online
+        = f.check_box :meets_online
+    .field
+      %p
+        #{image_tag('telephone-icon.png')} Telephone
+        = f.check_box :meets_telephone
+    .field
+      = f.label :skype, "Skype Username"
+      = f.text_field :skype
+    %hr
+    .field
+      = f.label :password
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+    .actions
+      = f.submit "Sign up", class: 'btn btn-success'
