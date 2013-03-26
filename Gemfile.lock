@@ -82,6 +82,7 @@ GEM
       nokogiri (~> 1.5.0)
       ruby-hmac
     formatador (0.2.4)
+    geocoder (1.1.6)
     haml (4.0.0)
       tilt
     haml-rails (0.4)
@@ -215,6 +216,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   country_select
   fog
+  geocoder
   hashrocket-rails
   jquery-rails
   mini_magick

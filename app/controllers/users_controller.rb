@@ -17,6 +17,24 @@ class UsersController < ApplicationController
   end
 
   def index
+    search_params
+  end
+
+  def search
+    search_params
+    if params[:location]
+      location = params[:location]
+      @near_users = User.near(location, 20)
+      @newresults = @near_users & @users
+      @onlineusers = []
+      @users.each do |u|
+        @onlineusers << u if u.meets_online? || u.meets_telephone?
+      end
+    else
+    end
+  end
+
+  def search_params
     @search = User.search(params[:q])
     @users = @search.result(distinct: true)
   end

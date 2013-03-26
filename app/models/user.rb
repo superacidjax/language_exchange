@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   has_private_messages
 
+  geocoded_by :address
+
+  after_validation :geocode
+
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -26,7 +30,8 @@ class User < ActiveRecord::Base
                   :email, :facebook, :first_name, :gender, :imessage,
                   :lang_learning, :lang_spoken, :last_name, :msn, :skype,
                   :password, :password_confirmation, :languages_attributes,
-                  :language_to_learns_attributes
+                  :language_to_learns_attributes, :meets_face_to_face, :meets_online,
+                  :meets_telephone
   # serialize :lang_learning, :lang_spoken, :days_available
 
   has_many :languages
@@ -49,6 +54,10 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
+  end
+
+  def address
+    [city, state, country].compact.join(', ')
   end
 
 end
