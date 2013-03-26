@@ -16,11 +16,6 @@ class UsersController < ApplicationController
     sender = current_user
   end
 
-  def messages
-    @received_messages = current_user.received_messages
-    @sent_messages = current_user.sent_messages
-  end
-
   def index
     @search = User.search(params[:q])
     @users = @search.result(distinct: true)
@@ -62,20 +57,6 @@ class UsersController < ApplicationController
     @users = user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
-
-  def send_message
-    recipient = User.find(params[:user].to_i)
-    sender = User.find(params[:sender].to_i)
-    message = Message.new
-    message.body = params[:message]
-    message.sender = sender
-    message.recipient = recipient
-    message.save
-    if message.save
-      redirect_to user_path(recipient), notice: "Message sent"
-      else
-      end
-    end
 
   private
 
