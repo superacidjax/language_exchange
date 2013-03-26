@@ -12,6 +12,8 @@
         = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
         %br
         = f.submit "Find a partner now!", class: "btn btn-success"
+    %p
+      Want more options? Try our #{link_to "advanced search", user_search_path}
   / %a.btn.btn-large.btn-success{"data-toggle" => "modal", :href => "#signupModal", :role => "button"} Sign up now!
 .span3.postit
   %h1

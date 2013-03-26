@@ -15,6 +15,7 @@ LanguageExchange::Application.routes.draw do
   resources :pages
   resources :relationships, only: [:create, :destroy]
 
+  match 'search', to: 'users#search', as: :user_search
   match 'privacy', to: 'pages#privacy', as: :privacy
   match 'messages', to: 'messages#index', as: :user_messages
   resources :messages
