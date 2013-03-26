@@ -1,40 +1,49 @@
-.center.hero-unit
-  %h1 Find a great language partner
+.center.hero-unit.span6.pull-right
+  %h1
+    I am looking for a conversation partner..
   %br
   #langfinder
     = search_form_for @search do |f|
-      = f.label :languages_name_cont, "I am learning"
-      = f.text_field :languages_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
-      %br
-      = f.label :language_to_learns_name_cont, "I speak"
-      = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
-      %br
-      = f.submit "Find a partner now!", class: "btn btn-success"
+      %p
+        = f.label :languages_name_cont, "I am learning"
+        = f.text_field :languages_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+      %p
+        = f.label :language_to_learns_name_cont, "I speak"
+        = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+        %br
+        = f.submit "Find a partner now!", class: "btn btn-success"
   / %a.btn.btn-large.btn-success{"data-toggle" => "modal", :href => "#signupModal", :role => "button"} Sign up now!
+.span3.postit
+  %h1
+    Hello man!
+  %p
+    Butcher tonx organic, quinoa next level neutra godard officia. Proident non chillwave meh nostrud street art. Odd future exercitation anim, brooklyn squid literally DIY. Proident banh mi wayfarers aliquip vinyl, duis swag fap echo park veniam dreamcatcher kale chips sed american apparel.
+.clearfix
+.tapeline
 
-#container
-  %ul.thumbnails
-    - @users.each do |user|
-      %li.span3
-
+.listingcontainer
+  - @users.each do |user|
+    %ul.thumbnails.span3
+      %li
         %a.thumbnail{href: user_path(user)}
           %img
-            = image_tag(user.photo_url(:small).to_s, class: 'img-polaroid')
-          .noteboard
-            %h3
-              = user_name(user)
-            %p
-              I speak
-              - user.languages.each do |language|
-                %p
-                  = language.name
-            %p
-              I am learning
-              - user.language_to_learns.each do |language|
-                %p
-                  = language.name
-            %p
-              I live in #{user.city}, #{user.country}
+            = image_tag(user.photo_url(:small).to_s, class: 'img-rounded')
+
+      %li
+        = link_to user_name(user), user
+      %li
+        I speak
+        - user.languages.each do |language|
+          %ul
+            %li
+              = language.name
+      %li
+        I am learning
+        - user.language_to_learns.each do |language|
+          %p
+            = language.name
+      %li
+        I live in #{user.city}, #{user.country}
 
 #myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header

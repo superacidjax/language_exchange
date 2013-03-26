@@ -6,13 +6,10 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     = yield :head
+    = render 'layouts/fonts'
   %body
     = render 'layouts/header'
     .container
       = render 'flashes'
       = yield
-    %hr
     = render 'layouts/footer'
-    %hr
-    %p.center
-      © LanguageBoard.com 2013 All Rights Reserved

@@ -3,16 +3,22 @@
 /* universal
 
 html
-  overflow-y: scroll
   color: #3f3d32
+  font-family: 'PT Sans', Helvetica, Arial, sans-serif
+  font-size: 16px
   a
     color: blue
   a:hover
     text-decoration: none
+  background: url(cork.jpg) no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
 
 body
-  background-color: #FAFAFA
   padding-top: 60px
+  background: transparent
 
 section
   overflow: auto
@@ -24,6 +30,29 @@ textarea
   text-align: center
   h1
     margin-bottom: 10px
+
+.tapeline
+  background-color: #8f98ff
+  height: 25px
+  width: 100%
+  margin: 36px 0 36px 0
+  box-shadow: 3px 2px 2px #330000
+
+
+.hero-unit
+  background: url("old_paper.jpg") repeat-y
+  box-shadow: 10px 10px 10px #3f3d32
+  h1
+    font-size: 45px
+.postit
+  background-color: #FFF68F
+  padding: 36px
+  box-shadow: 7px 5px 10px #4d4b3d
+  border-bottom-right-radius: 1.0em
+  h1
+    font-family: 'Dancing Script', Georgia, Times, serif
+    font-size: 59px
+    line-height: 60px
 
 .noblue
   a
@@ -42,12 +71,13 @@ textarea
 
 h1, h2, h3, h4, h5, h6
   line-height: 1
+  font-family: 'Arvo', Georgia, Times, serif
 
 h1
-  font-size: 3em
-  letter-spacing: -2px
   margin-bottom: 30px
   text-align: center
+  font-size: 59px
+  line-height: 70px
 
 h2
   font-size: 1.7em
@@ -58,13 +88,13 @@ h2
   color: #999
 
 p
-  font-size: 1.1em
-  line-height: 1.7em
+  line-height: 25px
 
 /* header
 
 .navbar
-  background-color: #FAFAFA
+  .navbar-inner
+  background: url("notebook_paper.jpg") repeat-x
   box-shadow: 1px 1px 7px #8B8378
 
 #logo
@@ -80,9 +110,6 @@ p
   &:hover
     color: #fff
     text-decoration: none
-
-.hero-unit
-  background-color: #EEE5DE
 
 .languages
   background-color: #EEE9E9
@@ -118,25 +145,35 @@ ul.ui-autocomplete
       background-color: #FFFCB2
 
 
-#container
+.listingcontainer
+  margin: 0 auto
+  padding: 0
 .thumbnails
+  border-top-right-radius: 0.2em
+  border-bottom-left-radius: 0.6em
+  border-top-left-radius: 0.4em
+  box-shadow: 7px 5px 10px #4d4b3d
+  overflow: auto
+  background-color: #f5f5f5
+  height: 550px
+  color: #555
+  font-size: 16px
+  padding: 0 !important
+  font-family: courier, monospace
+  margin-left: 9px
   li
-    -moz-border-radius: 1.4em
-    -ms-border-radius: 1.4em
-    -o-border-radius: 1.4em
-    -webkit-border-radius: 1.4em
-    border-radius: 1.4em
-    background-image: url("/assets/cork-board.jpg")
-.thumbnail
-  height: 500px
-  border: none
-.noteboard
-  background-color: #fff
-  opacity: .8
-  h3
-    text-align: center
-  p
-    padding-left: 10px
+    list-style: none
+    border-bottom: 1px dotted #58c8f5
+    text-indent: 25px
+    height: auto
+    padding: 10px
+    text-transform: capitalize
+  li:hover
+    background-color: #f0f0f0
+    -webkit-transition: all 0.2s
+    -moz-transition:    all 0.2s
+    -ms-transition:     all 0.2s
+    -o-transition:      all 0.2s
 
 .stats
   overflow: auto
@@ -155,15 +192,15 @@ ul.ui-autocomplete
     display: block
 
 footer
-  width: 90%
+  background: url("crush_paper.jpg") repeat-x
   z-index: 9999
   padding: 0
+  p
+    margin-left: 18px
+    padding-bottom: 9px
   ul.navigation
     float: right
     margin: auto
-    font-family: helvetica, sans-serif
-    font-weight: 100
-    font-style: normal
     padding-top: 12px
     li
       display: block
