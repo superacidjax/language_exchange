@@ -23,21 +23,23 @@
     = render 'follow_form' if logged_in?
 
     - unless current_user == user
-      %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
+      - if logged_in?
+        %a.btn.btn-large.btn-success.pull-right{"data-toggle" => "modal", :href => "#contactModal", :role => "button"} Contact #{user.first_name}
 
-  #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-    .modal-header
-      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-      %h3#myModalLabel Send a message to #{user_name(user)}
-    .modal-body
-      = form_tag '/send_message' do
-        = hidden_field_tag :user, user.id
-        = hidden_field_tag :sender, current_user.id
-        = label_tag :subject
-        = text_field_tag :subject
-        = label_tag :message
-        = text_area_tag :message
-        %hr
-        = submit_tag "Send Message", class: 'btn btn-success'
-    / .modal-footer
-    /   %a.btn.btn-primary{:href => "#"} Send Message
+        #contactModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+            %h3#myModalLabel Send a message to #{user_name(user)}
+          .modal-body
+            = form_tag '/send_message' do
+              = hidden_field_tag :user, user.id
+              = hidden_field_tag :sender, current_user.id
+              = label_tag :subject
+              = text_field_tag :subject
+              = label_tag :message
+              = text_area_tag :message
+              %hr
+              = submit_tag "Send Message", class: 'btn btn-success'
+      - else
+        %p.pull-right
+          = link_to "Sign up to contact this user", sign_up_path
