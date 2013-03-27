@@ -33,6 +33,14 @@
             = image_tag user.photo.small, class: 'img-rounded'
       %li
         = link_to user_name(user), user
+        %p
+          Speaks:
+          - user.languages.each do |language|
+            = language.name
+        %p
+          Learning:
+          - user.language_to_learns.each do |language|
+            = language.name
       %li
         - if user.meets_face_to_face?
           = image_tag('f2f_icon.png')
@@ -41,18 +49,8 @@
         - if user.meets_online?
           = image_tag('video-chat.png')
       %li
-        I speak
-        - user.languages.each do |language|
-          %ul
-            %li
-              = language.name
-      %li
-        I am learning
-        - user.language_to_learns.each do |language|
-          %p
-            = language.name
-      %li
-        I live in #{user.city}, #{user.country}
+        %p
+          #{user.city}, #{user.country}
 
 #myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
