@@ -1,6 +1,6 @@
 %h1
   Crop Photo
-= image_tag user.photo_url(:large), id: "cropbox"
+= image_tag user.photo.large, id: "cropbox"
 
 = form_for user do |f|
   - %w[x y w h].each do |attribute|

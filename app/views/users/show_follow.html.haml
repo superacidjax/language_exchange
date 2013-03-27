@@ -6,7 +6,7 @@
       %li.span3
         %a.thumbnail{href: user_path(user)}
           %img
-            = image_tag(user.photo_url(:small).to_s, class: 'img-polaroid')
+            = image_tag user.photo.small, class: 'img-polaroid'
           .noteboard
             %h3
               = user_name(user)

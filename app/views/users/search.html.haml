@@ -46,7 +46,7 @@
         %li
           %a.thumbnail{href: user_path(user)}
             %img
-              = image_tag(user.photo_url(:small).to_s, class: 'img-rounded')
+              = image_tag user.photo.small, class: 'img-rounded'
 
         %li
           = link_to user_name(user), user
@@ -78,7 +78,7 @@
           %li
             %a.thumbnail{href: user_path(user)}
               %img
-                = image_tag(user.photo_url(:small).to_s, class: 'img-rounded')
+                = image_tag user.photo.small, class: 'img-rounded'
           %li
             = link_to user_name(user), user
           %li
