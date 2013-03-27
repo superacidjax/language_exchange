@@ -66,7 +66,7 @@ class UsersController < ApplicationController
       else
       end
       auto_login(user)
-      redirect_to user, :notice => "Your account has been created!"
+      # redirect_to user, notice: "Your account has been created!"
     else
       render :new
     end
@@ -77,9 +77,8 @@ class UsersController < ApplicationController
       if params[:user][:photo].present?
         render :crop
       else
-        redirect_to(user)
+        redirect_to user, notice: "Your account has been updated"
       end
-      # redirect_to(user)
     else
       render :edit
     end
