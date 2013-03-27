@@ -1,68 +1,70 @@
-%h1
-  Profile Settings
-%p
-  = link_to "Return to home page", root_path
-= simple_form_for user do |f|
-  - if user.errors.any?
-    .error_messages
-      %h2 Form is invalid
-      %ul
-        - for message in user.errors.full_messages
-          %li= message
-  .field
-    = f.label :photo
-    = f.file_field :photo
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :city
-    = f.text_field :city
-  .field
-    = f.input :country
-    / TODO: set country priorities
-  .field
-    = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
-  %h2
-    Languages I know
-  #iknow.languages
-    - user.languages.build
-    = f.simple_fields_for :languages do |language|
-      = render 'language_fields', :f => language
-    .links
-      = link_to_add_association 'add another language', f, :languages
-  %br
-  %h2
-    Languages I am learning
-  #iwanttoknow.languages
-    - user.language_to_learns.build
-    = f.simple_fields_for :language_to_learns do |language|
-      = render 'language_to_learn_fields', :f => language
-    .links
-      = link_to_add_association 'add another language', f, :language_to_learns
-  %br
-  .field
-    = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
-                            order: [:day, :month, :year]
-  .field
-    = f.label :bio, "About Me"
-    = f.text_area :bio, rows: 10
-  .field
-    = f.label :skype, "Skype Username"
-    = f.text_field :skype
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit "Update", class: 'btn btn-success'
+.postit
+  %h1
+    Profile Settings
   %p
-    = link_to "Delete my profile", user, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to "Return to home page", root_path
+  = simple_form_for user do |f|
+    - if user.errors.any?
+      .error_messages
+        %h2 Form is invalid
+        %ul
+          - for message in user.errors.full_messages
+            %li= message
+    .field
+      = f.label :photo
+      = f.file_field :photo
+    .field
+      = f.label :first_name
+      = f.text_field :first_name
+    .field
+      = f.label :last_name
+      = f.text_field :last_name
+    .field
+      = f.label :email
+      = f.text_field :email
+    .field
+      = f.label :city
+      = f.text_field :city
+    .field
+      = f.input :country
+      / TODO: set country priorities
+    .field
+      = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
+    %hr
+    %h3
+      Languages I know
+    #iknow
+      - user.languages.build
+      = f.simple_fields_for :languages do |language|
+        = render 'language_fields', :f => language
+      .links
+        = link_to_add_association 'add another language', f, :languages
+    %hr
+    %h3
+      Languages I am learning
+    #iwanttoknow
+      - user.language_to_learns.build
+      = f.simple_fields_for :language_to_learns do |language|
+        = render 'language_to_learn_fields', :f => language
+      .links
+        = link_to_add_association 'add another language', f, :language_to_learns
+    %hr
+    .field
+      = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
+                              order: [:day, :month, :year]
+    .field
+      = f.label :bio, "About Me"
+      = f.text_area :bio, rows: 10
+    .field
+      = f.label :skype, "Skype Username"
+      = f.text_field :skype
+    .field
+      = f.label :password
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+    .actions
+      = f.submit "Update", class: 'btn btn-success'
+    %p.pull-right
+      = link_to "Delete my profile", user, method: :delete, class: 'btn btn-large btn-danger', data: { confirm: 'Are you sure?' }
