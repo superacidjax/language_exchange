@@ -9,6 +9,20 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
 
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+  after_update :crop_image
+
+  def crop_image
+    if crop_x.present?
+      mini_magick = MiniMagick::Image.open(self.photo.large.path)
+      crop_params = "#{crop_w}x#{crop_h}+#{crop_x}+#{crop_y}"
+      mini_magick.crop(crop_params)
+      mini_magick.write(self.photo.path)
+      photo.recreate_versions!
+    end
+  end
+
   has_private_messages
 
   geocoded_by :address
@@ -31,7 +45,7 @@ class User < ActiveRecord::Base
                   :lang_learning, :lang_spoken, :last_name, :msn, :skype,
                   :password, :password_confirmation, :languages_attributes,
                   :language_to_learns_attributes, :meets_face_to_face, :meets_online,
-                  :meets_telephone
+                  :meets_telephone, :crop_x, :crop_y, :crop_w, :crop_h
   # serialize :lang_learning, :lang_spoken, :days_available
 
   has_many :languages

@@ -1,0 +1,9 @@
+%h1
+  Crop Photo
+= image_tag user.photo_url(:large), id: "cropbox"
+
+= form_for user do |f|
+  - %w[x y w h].each do |attribute|
+    = f.hidden_field "crop_#{attribute}"
+  .actions
+    = f.submit "Crop", class: 'btn btn-success'

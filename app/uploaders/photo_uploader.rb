@@ -1,7 +1,7 @@
 class PhotoUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  #include CarrierWave::RMagick
+  # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
@@ -24,8 +24,25 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [175, 175]
   end
 
+  version :large do
+    process :resize_to_limit => [600, 600]
+  end
+
   version :profile do
     process :resize_to_fill => [250, 250]
+  end
+
+  def crop
+    if model.crop_x.present?
+      resize_to_limit(600, 600)
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop!(x, y, w, h)
+      end
+    end
   end
 
   def extension_white_list

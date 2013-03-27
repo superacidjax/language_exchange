@@ -61,6 +61,10 @@ class UsersController < ApplicationController
 
   def create
     if user.save
+      if params[:user][:photo].present?
+        render :crop
+      else
+      end
       auto_login(user)
       redirect_to user, :notice => "Your account has been created!"
     else
@@ -70,7 +74,12 @@ class UsersController < ApplicationController
 
   def update
     if user.save
-      redirect_to(user)
+      if params[:user][:photo].present?
+        render :crop
+      else
+        redirect_to(user)
+      end
+      # redirect_to(user)
     else
       render :edit
     end
