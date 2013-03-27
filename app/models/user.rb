@@ -11,16 +11,10 @@ class User < ActiveRecord::Base
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-  after_update :crop_image
+  # after_update :crop_image
 
   def crop_image
-    if crop_x.present?
-      mini_magick = MiniMagick::Image.open(self.photo.large.path)
-      crop_params = "#{crop_w}x#{crop_h}+#{crop_x}+#{crop_y}"
-      mini_magick.crop(crop_params)
-      mini_magick.write(self.photo.path)
-      photo.recreate_versions!
-    end
+    photo.recreate_versions! if crop_x.present?
   end
 
   has_private_messages

@@ -5,7 +5,7 @@
     = render 'users/stats'
 .well.span12
   .img-polaroid.span2
-    = image_tag(user.photo.small)
+    = image_tag(user.photo_url(:small))
   %h3
     = user_name(user)
   %h4
