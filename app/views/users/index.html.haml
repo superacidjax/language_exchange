@@ -32,6 +32,9 @@
           %img
             = image_tag user.photo.small, class: 'img-rounded'
       %li
+        %p
+          Last active: #{distance_of_time_in_words(user.last_login_at, Time.now)} ago
+      %li
         = link_to user_name(user), user
         %p
           Speaks:

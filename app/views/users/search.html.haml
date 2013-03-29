@@ -34,9 +34,13 @@
         %h4
           Near (City, Country)
           = text_field_tag :location, params[:location]
+        %h4
+          Last logged in
+        %p
+          = f.select :last_login_at_gteq, [['Within the last 24 hours', (Time.now - 24.hours)], ['Within the last week', (Time.now - 7.days)], ['Within with last month', (Time.now - 30.days)]]
 
-        %br
-        = f.submit "Find a partner now!", class: "btn btn-success"
+      .span7.pull-right
+        = f.submit "Find a partner now!", class: "btn btn-large btn-success"
   .clearfix
 .tapeline
 .listingcontainer
@@ -50,6 +54,9 @@
 
         %li
           = link_to user_name(user), user
+        %li
+          %p
+            Last active: #{distance_of_time_in_words(user.last_login_at, Time.now)} ago
         %li
           I speak
           - user.languages.each do |language|
@@ -81,6 +88,9 @@
                 = image_tag user.photo.small, class: 'img-rounded'
           %li
             = link_to user_name(user), user
+          %li
+            %p
+              Last active: #{distance_of_time_in_words(user.last_login_at, Time.now)} ago
           %li
             - if user.meets_face_to_face?
               = image_tag('f2f_icon.png')
