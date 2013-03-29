@@ -29,11 +29,12 @@
         %h4
           Between
         %p
-          #{text_field_tag :min_age, params[:min_age], id: 'ages'} and #{text_field_tag :max_age, params[:max_age], id: 'ages'} years old
+          #{text_field_tag :min_age, params[:min_age], class: 'ages'} and #{text_field_tag :max_age, params[:max_age], class: 'ages'} years old
 
-        %h4
-          Near (City, Country)
-          = text_field_tag :location, params[:location]
+        %h5
+          Within #{text_field_tag :distance, params[:distance], class: 'ages'} km of
+        %h5 (City, Country)
+        = text_field_tag :location, params[:location]
         %h4
           Last logged in
         %p

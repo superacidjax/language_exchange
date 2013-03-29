@@ -21,8 +21,10 @@ class UsersController < ApplicationController
   end
 
   def location_users(users)
+    distance = params[:distance].to_f
+    distance = distance * 0.621371
     location = params[:location]
-    @near_users = User.near(location, 20)
+    @near_users = User.near(location, distance)
     @locationresults = @near_users & @users
     @newresults = @locationresults & @users
   end
