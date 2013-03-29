@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326175147) do
+ActiveRecord::Schema.define(:version => 20130329173310) do
 
   create_table "language_listings", :force => true do |t|
     t.string   "name"
@@ -88,8 +88,12 @@ ActiveRecord::Schema.define(:version => 20130326175147) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "state"
+    t.datetime "last_login_at"
+    t.datetime "last_logout_at"
+    t.datetime "last_activity_at"
   end
 
+  add_index "users", ["last_logout_at", "last_activity_at"], :name => "index_users_on_last_logout_at_and_last_activity_at"
   add_index "users", ["meets_face_to_face"], :name => "index_users_on_meets_face_to_face"
   add_index "users", ["meets_online"], :name => "index_users_on_meets_online"
   add_index "users", ["meets_telephone"], :name => "index_users_on_meets_telephone"

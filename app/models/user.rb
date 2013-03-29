@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
                   :lang_learning, :lang_spoken, :last_name, :msn, :skype,
                   :password, :password_confirmation, :languages_attributes,
                   :language_to_learns_attributes, :meets_face_to_face, :meets_online,
-                  :meets_telephone, :crop_x, :crop_y, :crop_w, :crop_h
+                  :meets_telephone, :last_login_at, :last_logout_at, :last_activity_at
   # serialize :lang_learning, :lang_spoken, :days_available
 
   has_many :languages
