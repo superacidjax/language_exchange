@@ -11,7 +11,13 @@
         = f.label :language_to_learns_name_cont, "I speak"
         = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
         %br
-        = f.submit "Find a partner now!", class: "btn btn-success"
+      %p
+        I want a partner within #{text_field_tag :distance, params[:distance], class: 'ages'} km of
+      %p (City, Country)
+      = text_field_tag :location, params[:location]
+      %br
+      %hr
+      = f.submit "Find a partner now!", class: "btn btn-large btn-success"
     %p
       Want more options? Try our #{link_to "advanced search", user_search_path}
   / %a.btn.btn-large.btn-success{"data-toggle" => "modal", :href => "#signupModal", :role => "button"} Sign up now!
@@ -24,7 +30,39 @@
 .tapeline
 
 .listingcontainer
-  - @users.shuffle!
+  - @newresults.sort_by{|e| e[:last_login_at]}
+  - @newresults.each do |user|
+    %ul.thumbnails.span3
+      %li
+        %a.thumbnail{href: user_path(user)}
+          %img
+            = image_tag user.photo.small, class: 'img-rounded'
+      %li
+        %p
+          Last active: #{distance_of_time_in_words(user.last_login_at, Time.now)} ago
+      %li
+        = link_to user_name(user), user
+      %li
+        #{user.birthday_age} years old
+        %p
+          Speaks:
+          - user.languages.each do |language|
+            = language.name
+        %p
+          Learning:
+          - user.language_to_learns.each do |language|
+            = language.name
+      %li
+        - if user.meets_face_to_face?
+          = image_tag('f2f_icon.png')
+        - if user.meets_telephone?
+          = image_tag('telephone-icon.png')
+        - if user.meets_online?
+          = image_tag('video-chat.png')
+      %li
+        %p
+          #{user.city}, #{user.country}
+  - @users.sort_by{|e| e[:last_login_at]}
   - @users.each do |user|
     %ul.thumbnails.span3
       %li

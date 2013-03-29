@@ -18,6 +18,16 @@ class UsersController < ApplicationController
 
   def index
     search_params
+    location_users(@users) unless params[:location].blank?
+    if @newresults
+      @newresults = @newresults.sort_by{|e| e[:last_login_at]}
+      @newresults.reverse!
+      @users = @users - @newresults
+      @newresults.sort! .sort! {|a,b| (a[:meets_face_to_face] == b[:meets_face_to_face]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:meets_face_to_face] ? -1 : 1)}
+    else
+      @newresults = []
+    end
+    @users.sort! {|a,b| (a[:meets_face_to_face] == b[:meets_face_to_face]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:meets_face_to_face] ? -1 : 1)}
   end
 
   def location_users(users)
@@ -84,6 +94,8 @@ class UsersController < ApplicationController
   def search_params
     @search = User.search(params[:q])
     @users = @search.result(distinct: true)
+    @users = @users.sort_by{|e| e[:last_login_at]}
+    @users.reverse!
   end
 
   def create
