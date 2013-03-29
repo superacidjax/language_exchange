@@ -9,13 +9,13 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
 
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   # after_update :crop_image
 
-  def crop_image
-    photo.recreate_versions! if crop_x.present?
-  end
+  # def crop_image
+  #   photo.recreate_versions! if crop_x.present?
+  # end
 
   has_private_messages
 
