@@ -37,7 +37,7 @@
         %h4
           Last logged in
         %p
-          = f.select :last_login_at_gteq, [['Within the last 24 hours', (Time.now - 24.hours)], ['Within the last week', (Time.now - 7.days)], ['Within with last month', (Time.now - 30.days)]]
+          = f.select :last_login_at_gteq, [['Anytime', (Time.now - 300.years)], ['Within the last week', (Time.now - 7.days)], ['Within the last 24 hours', (Time.now - 24.hours)],  ['Within with last month', (Time.now - 30.days)]]
 
       .span7.pull-right
         = f.submit "Find a partner now!", class: "btn btn-large btn-success"
@@ -52,8 +52,10 @@
             %img
               = image_tag user.photo.small, class: 'img-rounded'
 
-        %li
+        %h2
           = link_to user_name(user), user
+        %li
+          #{user.birthday_age} years old
         %li
           %p
             Last active: #{distance_of_time_in_words(user.last_login_at, Time.now)} ago
@@ -70,44 +72,3 @@
               = language.name
         %li
           I live in #{user.city}, #{user.country}
-  - else
-    - if @onlineusers
-      - if @onlineusers.blank?
-        .postit
-          = render 'users/no_results'
-      - unless params[:location].blank? && !@onlineusers.blank?
-        .postit
-          %h4
-            We couldn't find any users near you, however here are users that are interested in online or telephone meetups.
-      .headlineshort
-      - @onlineusers.each do |user|
-        %ul.thumbnails.span3
-          %li
-            %a.thumbnail{href: user_path(user)}
-              %img
-                = image_tag user.photo.small, class: 'img-rounded'
-          %li
-            = link_to user_name(user), user
-          %li
-            %p
-              Last active: #{distance_of_time_in_words(user.last_login_at, Time.now)} ago
-          %li
-            - if user.meets_face_to_face?
-              = image_tag('f2f_icon.png')
-            - if user.meets_telephone?
-              = image_tag('telephone-icon.png')
-            - if user.meets_online?
-              = image_tag('video-chat.png')
-          %li
-            I speak
-            - user.languages.each do |language|
-              %ul
-                %li
-                  = language.name
-          %li
-            I am learning
-            - user.language_to_learns.each do |language|
-              %p
-                = language.name
-          %li
-            I live in #{user.city}, #{user.country}

@@ -20,38 +20,63 @@ class UsersController < ApplicationController
     search_params
   end
 
+  def location_users(users)
+    location = params[:location]
+    @near_users = User.near(location, 20)
+    @locationresults = @near_users & @users
+    @newresults = @locationresults & @users
+  end
+
+  # def online(users)
+  #   online = params[:meets_online]
+  #   @onlineusers = User.where(meets_online: true)
+  #   @onlineresults = @onlineusers & @users
+  # end
+
+  # def telephone(users)
+  #   telephone = params[:meets_telephone]
+  #   @telephoneusers = User.where(meets_telephone: true)
+  #   @telephoneresults = @telephoneusers & @users
+  # end
+
+  # def face_to_face(users)
+  #   face_to_face = params[:meets_face_to_face]
+  #   @faceusers = User.where(meets_face_to_face: true)
+  #   @faceresults = @faceusers & @users
+  # end
+
+  def right_age(users)
+    @rightage = []
+    users.each do |u|
+      if params[:max_age].present? && params[:min_age].present?
+            if (u.birthday_age <= params[:max_age].to_i)
+                  if (u.birthday_age >= params[:min_age].to_i)
+                    @rightage << u
+                  else
+                  end
+            else
+            end
+      elsif params[:max_age].present? && params[:min_age].blank?
+            if (u.birthday_age <= params[:max_age].to_i)
+              @rightage << u
+            else
+            end
+      elsif params[:min_age].present? && params[:max_age].blank?
+            if (u.birthday_age >= params[:min_age].to_i)
+              @rightage << u
+            else
+            end
+      else
+      end
+    end
+  end
+
   def search
     search_params
-    if params[:location]
-      location = params[:location]
-      @near_users = User.near(location, 20)
-      @newresults = @near_users & @users
-      @onlineusers = []
-      @users.each do |u|
-        @onlineusers << u if u.meets_online? || u.meets_telephone?
-      end
-    else
-    end
-    unless params[:min_age].blank? && params[:max_age].blank?
-      @rightage = []
-      @onlineusers.each do |u|
-        if (u.birthday_age <= params[:max_age].to_i)
-          if (u.birthday_age >= params[:min_age].to_i)
-            @rightage << u
-          else
-          end
-        else
-        end
-      end
-    else
-      # Task.find(:all, :conditions => ["complete=? and priority IS ?", false, nil])
-    end
-    if !@rightage.blank?
-      @newresults = @rightage & @users
-      @onlineusers = @rightage & @onlineusers
-    else
-    end
-
+    location_users(@users) unless params[:location].blank?
+    @newresults = @users unless @locationresults
+    right_age(@newresults) unless params[:min_age].blank? && params[:max_age].blank?
+    @newresults = @rightage unless @rightage.nil?
   end
 
   def search_params
