@@ -11,11 +11,6 @@
         = f.label :language_to_learns_name_cont, "I speak"
         = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
         %br
-      %p
-        I want a partner within #{text_field_tag :distance, params[:distance], class: 'ages'} km of
-      %p (City, Country)
-      = text_field_tag :location, params[:location]
-      %br
       %hr
       = f.submit "Find a partner now!", class: "btn btn-large btn-success"
     %p

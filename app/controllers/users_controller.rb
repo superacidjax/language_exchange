@@ -17,8 +17,10 @@ class UsersController < ApplicationController
   end
 
   def index
+    @ip_address = request.ip
+    # @ip_address = "143.93.127.255" German IP address for testing
     search_params
-    location_users(@users) unless params[:location].blank?
+    ip_detect_users(@users, @ip_address)
     if @newresults
       @newresults = @newresults.sort_by{|e| e[:last_login_at]}
       @newresults.reverse!
@@ -29,6 +31,12 @@ class UsersController < ApplicationController
     end
     @users.sort! {|a,b| (a[:meets_face_to_face] == b[:meets_face_to_face]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:meets_face_to_face] ? -1 : 1)}
   end
+
+  def ip_detect_users(users, ip_address)
+    @near_users = User.near(ip_address, 500)
+    @newresults = @near_users & @users
+  end
+
 
   def location_users(users)
     distance = params[:distance].to_f
