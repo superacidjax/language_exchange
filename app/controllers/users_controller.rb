@@ -18,23 +18,27 @@ class UsersController < ApplicationController
 
   def index
     @ip_address = request.ip
-    # @ip_address = "143.93.127.255" German IP address for testing
+    # @ip_address = "143.93.127.255" #German IP address for testing
     search_params
     ip_detect_users(@users, @ip_address)
     if @newresults
       @newresults = @newresults.sort_by{|e| e[:last_login_at]}
       @newresults.reverse!
       @users = @users - @newresults
-      @newresults.sort! .sort! {|a,b| (a[:meets_face_to_face] == b[:meets_face_to_face]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:meets_face_to_face] ? -1 : 1)}
+      # @newresults.sort! .sort! {|a,b| (a[:meets_face_to_face] == b[:meets_face_to_face]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:meets_face_to_face] ? -1 : 1)}
     else
       @newresults = []
     end
-    @users.sort! {|a,b| (a[:meets_face_to_face] == b[:meets_face_to_face]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:meets_face_to_face] ? -1 : 1)}
+    @users.sort! {|a,b| (a[:last_login_at] == b[:last_login_at]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:last_login_at] ? -1 : 1)}
   end
 
   def ip_detect_users(users, ip_address)
-    @near_users = User.near(ip_address, 500)
-    @newresults = @near_users & @users
+    @near_users = User.near(ip_address, 19)
+    if @near_users.present?
+      @newresults = (@near_users & @users)
+      @newresults.sort! {|a,b| (a[:last_login_at] == b[:last_login_at]) ? ((a[:id] < b[:id]) ? -1 : 1) : (a[:last_login_at] ? -1 : 1)}
+    else
+    end
   end
 
 
