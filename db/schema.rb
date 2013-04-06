@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329173310) do
+ActiveRecord::Schema.define(:version => 20130406005331) do
 
   create_table "language_listings", :force => true do |t|
     t.string   "name"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20130329173310) do
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email",                                           :null => false
+    t.string   "email",                                              :null => false
     t.string   "city"
     t.string   "country"
     t.string   "lang_spoken"
@@ -76,21 +76,24 @@ ActiveRecord::Schema.define(:version => 20130329173310) do
     t.string   "msn"
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.date     "birthday"
     t.string   "photo"
-    t.boolean  "meets_face_to_face",           :default => false
-    t.boolean  "meets_online",                 :default => false
-    t.boolean  "meets_telephone",              :default => false
+    t.boolean  "meets_face_to_face",              :default => false
+    t.boolean  "meets_online",                    :default => false
+    t.boolean  "meets_telephone",                 :default => false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "state"
     t.datetime "last_login_at"
     t.datetime "last_logout_at"
     t.datetime "last_activity_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
   end
 
   add_index "users", ["last_logout_at", "last_activity_at"], :name => "index_users_on_last_logout_at_and_last_activity_at"
@@ -98,5 +101,6 @@ ActiveRecord::Schema.define(:version => 20130329173310) do
   add_index "users", ["meets_online"], :name => "index_users_on_meets_online"
   add_index "users", ["meets_telephone"], :name => "index_users_on_meets_telephone"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
 
 end

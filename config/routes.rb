@@ -1,6 +1,6 @@
 LanguageExchange::Application.routes.draw do
 
-  get "messages/show"
+  # get "messages/show"
 
   get "logout" => "sessions#destroy", :as => "sign_out"
   get "sign_in" => "sessions#new", :as => "sign_in"
@@ -14,6 +14,7 @@ LanguageExchange::Application.routes.draw do
   resources :sessions
   resources :pages
   resources :relationships, only: [:create, :destroy]
+  resources :password_resets
 
   match 'search', to: 'users#search', as: :user_search
   match 'privacy', to: 'pages#privacy', as: :privacy
