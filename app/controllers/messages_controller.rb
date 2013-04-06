@@ -25,6 +25,7 @@ class MessagesController < ApplicationController
     message.save
     if message.save
       redirect_to user_path(recipient), notice: "Message sent"
+      NotificationsMailer.message_notification(recipient, sender).deliver
       else
       end
     end
