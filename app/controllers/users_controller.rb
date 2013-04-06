@@ -41,9 +41,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
-
   def right_age(users)
     @rightage = []
     users.each do |u|
@@ -72,12 +69,12 @@ class UsersController < ApplicationController
 
   def search
     search_params
+    @newresults = @users
     if params[:location].present?
       location_users(@users)
     else
-      country_users(@users) unless params[:country].blank?
+      country_users(@users) unless params[:country].blank? || params[:country] = ""
     end
-    @newresults = @users unless @locationresults
     right_age(@newresults) unless params[:min_age].blank? && params[:max_age].blank?
     @newresults = @rightage unless @rightage.nil?
     params[:country] = nil

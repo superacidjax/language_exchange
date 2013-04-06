@@ -32,7 +32,7 @@
       .span3
         %h5
           Country
-        = country_select :country, params[:country]
+        = country_select :country, params[:country], nil, prompt: ""
 
         %h5
           Within #{text_field_tag :distance, params[:distance], class: 'ages'} km of
