@@ -107,16 +107,17 @@ class UsersController < ApplicationController
   end
 
   def search_params
+    @notactive = User.where(last_login_at: nil)
     @search = User.search(params[:q])
     @users = @search.result(distinct: true)
+    @users = @users - @notactive
     @users = @users.sort_by{|e| e[:last_login_at]}
     @users.reverse!
   end
 
   def create
     if user.save
-      auto_login(user)
-      redirect_to user, notice: "Your account has been created!"
+      redirect_to root_path, notice: "Check your email to confirm your account!!"
     else
       render :new
     end
@@ -152,6 +153,15 @@ class UsersController < ApplicationController
     @title = "Followers"
     @users = user.followers.paginate(page: params[:page])
     render 'show_follow'
+  end
+
+  def activate
+    if (@user = User.load_from_activation_token(params[:id]))
+      @user.activate!
+      redirect_to sign_in_path, notice: "Your account has been activated"
+    else
+      not_authenticated
+    end
   end
 
   private
