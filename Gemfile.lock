@@ -254,6 +254,7 @@ DEPENDENCIES
   simple-private-messages (= 0.0.0)!
   simple_form
   sorcery
+  thin
   turbolinks
   uglifier (>= 1.0.3)
   will_paginate
