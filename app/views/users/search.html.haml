@@ -13,6 +13,10 @@
           I speak..
         %p
           = f.text_field :language_to_learns_name_cont, :class=>"lang_search", data: {autocomplete_source: autocomplete_items }
+        %h4
+          Between
+        %p
+          #{text_field_tag :min_age, params[:min_age], class: 'ages'} and #{text_field_tag :max_age, params[:max_age], class: 'ages'} years old
       .span3
         %h4
           I want to meet..
@@ -26,14 +30,13 @@
           #{image_tag('telephone-icon.png')} Telephone
           = f.check_box :meets_telephone_true
       .span3
-        %h4
-          Between
-        %p
-          #{text_field_tag :min_age, params[:min_age], class: 'ages'} and #{text_field_tag :max_age, params[:max_age], class: 'ages'} years old
+        %h5
+          Country
+        = country_select :country, params[:country]
 
         %h5
           Within #{text_field_tag :distance, params[:distance], class: 'ages'} km of
-        %h5 (City, Country)
+        %h5 (City)
         = text_field_tag :location, params[:location]
         %h4
           Last logged in
@@ -71,5 +74,12 @@
           - user.language_to_learns.each do |language|
             %p
               = language.name
+        %li
+          - if user.meets_face_to_face?
+            = image_tag('f2f_icon.png')
+          - if user.meets_telephone?
+            = image_tag('telephone-icon.png')
+          - if user.meets_online?
+            = image_tag('video-chat.png')
         %li
           I live in #{user.city}, #{user.country}

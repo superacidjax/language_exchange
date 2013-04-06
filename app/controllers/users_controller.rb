@@ -42,54 +42,29 @@ class UsersController < ApplicationController
   end
 
 
-  def location_users(users)
-    distance = params[:distance].to_f
-    distance = distance * 0.621371
-    location = params[:location]
-    @near_users = User.near(location, distance)
-    @locationresults = @near_users & @users
-    @newresults = @locationresults & @users
-  end
 
-  # def online(users)
-  #   online = params[:meets_online]
-  #   @onlineusers = User.where(meets_online: true)
-  #   @onlineresults = @onlineusers & @users
-  # end
-
-  # def telephone(users)
-  #   telephone = params[:meets_telephone]
-  #   @telephoneusers = User.where(meets_telephone: true)
-  #   @telephoneresults = @telephoneusers & @users
-  # end
-
-  # def face_to_face(users)
-  #   face_to_face = params[:meets_face_to_face]
-  #   @faceusers = User.where(meets_face_to_face: true)
-  #   @faceresults = @faceusers & @users
-  # end
 
   def right_age(users)
     @rightage = []
     users.each do |u|
       if params[:max_age].present? && params[:min_age].present?
-            if (u.birthday_age <= params[:max_age].to_i)
-                  if (u.birthday_age >= params[:min_age].to_i)
-                    @rightage << u
-                  else
-                  end
-            else
-            end
+        if (u.birthday_age <= params[:max_age].to_i)
+          if (u.birthday_age >= params[:min_age].to_i)
+                      @rightage << u
+          else
+          end
+        else
+        end
       elsif params[:max_age].present? && params[:min_age].blank?
-            if (u.birthday_age <= params[:max_age].to_i)
-              @rightage << u
-            else
-            end
+        if (u.birthday_age <= params[:max_age].to_i)
+          @rightage << u
+        else
+        end
       elsif params[:min_age].present? && params[:max_age].blank?
-            if (u.birthday_age >= params[:min_age].to_i)
-              @rightage << u
-            else
-            end
+        if (u.birthday_age >= params[:min_age].to_i)
+          @rightage << u
+        else
+        end
       else
       end
     end
@@ -97,10 +72,41 @@ class UsersController < ApplicationController
 
   def search
     search_params
-    location_users(@users) unless params[:location].blank?
+    if params[:location].present?
+      location_users(@users)
+    else
+      country_users(@users) unless params[:country].blank?
+    end
     @newresults = @users unless @locationresults
     right_age(@newresults) unless params[:min_age].blank? && params[:max_age].blank?
     @newresults = @rightage unless @rightage.nil?
+    params[:country] = nil
+    params[:location] = nil
+    params[:distance] = nil
+  end
+
+  def country_users(users)
+    country = params[:country][0]
+    @country_users = User.where(country: country)
+    @locationresults = @country_users & @users
+    @newresults = @locationresults & @users
+  end
+
+  def location_users(users)
+    if params[:distance]
+      distance = params[:distance].to_f
+    else
+      distance = 19
+    end
+    if params[:country].present?
+      country = params[:country][0]
+      location = params[:location] + "," + country
+    else
+      location = params[:location]
+    end
+    @near_users = User.near(location, distance)
+    @locationresults = @near_users & @users
+    @newresults = @locationresults & @users
   end
 
   def search_params
@@ -112,10 +118,6 @@ class UsersController < ApplicationController
 
   def create
     if user.save
-      # if params[:user][:photo].present?
-      #   render :crop
-      # else
-      # end
       auto_login(user)
       redirect_to user, notice: "Your account has been created!"
     else
