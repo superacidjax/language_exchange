@@ -30,6 +30,10 @@ end
 group :production do
 end
 
+group :development do
+  gem 'mailcatcher'
+end
+
 group :development, :test do
   gem 'pry-debugger'
   gem 'pry-rails'

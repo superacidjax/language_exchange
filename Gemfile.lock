@@ -57,6 +57,7 @@ GEM
     coffee-script-source (1.4.0)
     columnize (0.3.6)
     country_select (1.1.3)
+    daemons (1.1.9)
     debugger (1.2.4)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
@@ -66,6 +67,7 @@ GEM
     debugger-ruby_core_source (1.1.9)
     decent_exposure (2.1.0)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     excon (0.16.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -107,6 +109,15 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailcatcher (0.5.11)
+      activesupport (~> 3.0)
+      eventmachine (~> 1.0.0)
+      haml (>= 3.1, < 5)
+      mail (~> 2.3)
+      sinatra (~> 1.2)
+      skinny (~> 0.2.3)
+      sqlite3 (~> 1.3)
+      thin (~> 1.5.0)
     method_source (0.8.1)
     mime-types (1.21)
     multi_json (1.6.1)
@@ -138,6 +149,8 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-protection (1.5.0)
+      rack
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -180,6 +193,13 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    sinatra (1.3.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.3)
+      tilt (~> 1.3, >= 1.3.3)
+    skinny (0.2.3)
+      eventmachine (~> 1.0.0)
+      thin (~> 1.5.0)
     slop (3.4.3)
     sorcery (0.8.1)
       bcrypt-ruby (~> 3.0.0)
@@ -190,6 +210,11 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.7)
+    thin (1.5.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.17.0)
     tilt (1.3.3)
     treetop (1.4.12)
@@ -217,6 +242,7 @@ DEPENDENCIES
   geocoder
   hashrocket-rails
   jquery-rails
+  mailcatcher
   pg
   pry-debugger
   pry-rails
