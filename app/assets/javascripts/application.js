@@ -13,8 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.Jcrop
 //= require bootstrap
 //= require cocoon
-//= require turbolinks
+//= require bootstrap-datepicker
 //= require_tree .
