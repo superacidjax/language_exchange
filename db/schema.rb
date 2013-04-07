@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406013454) do
+ActiveRecord::Schema.define(:version => 20130407013644) do
 
   create_table "language_listings", :force => true do |t|
     t.string   "name"
@@ -97,6 +97,11 @@ ActiveRecord::Schema.define(:version => 20130406013454) do
     t.string   "activation_state"
     t.string   "activation_token"
     t.datetime "activation_token_expires_at"
+    t.boolean  "meets_email"
+    t.boolean  "accepts_terms"
+    t.boolean  "meets_skype"
+    t.boolean  "meets_facebook"
+    t.boolean  "meets_msn"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"

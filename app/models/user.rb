@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :first_name
   validates_presence_of :last_name
+  # validates_presence_of :accepts_terms, on: :create, allow_nil: false, message: "not completed"
 
   # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
@@ -22,6 +23,7 @@ class User < ActiveRecord::Base
   geocoded_by :address
 
   after_validation :geocode
+  before_save :accepts_terms
 
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -39,7 +41,8 @@ class User < ActiveRecord::Base
                   :lang_learning, :lang_spoken, :last_name, :msn, :skype,
                   :password, :password_confirmation, :languages_attributes,
                   :language_to_learns_attributes, :meets_face_to_face, :meets_online,
-                  :meets_telephone, :last_login_at, :last_logout_at, :last_activity_at
+                  :meets_telephone, :last_login_at, :last_logout_at, :last_activity_at,
+                  :meets_email, :accepts_terms
   # serialize :lang_learning, :lang_spoken, :days_available
 
   has_many :languages
@@ -76,6 +79,10 @@ class User < ActiveRecord::Base
 
   def address
     [city, state, country].compact.join(', ')
+  end
+
+  def accepts_terms
+    self.accepts_terms = true
   end
 
 end

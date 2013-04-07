@@ -1,6 +1,9 @@
-.postit
-  %h1
-    Sign up for a free profile
+.bigpaper.paper
+  .headerbox
+    %p
+      Welcome to the LanguageBoard sign up page.
+    %p
+      A few clicks and we will get you right to connecting with new learning partners!
   = simple_form_for user do |f|
     - if user.errors.any?
       .error_messages
@@ -8,75 +11,139 @@
         %ul
           - for message in user.errors.full_messages
             %li= message
-    .field
+    %br
+    .span3
       = f.label :first_name
       = f.text_field :first_name
-    .field
+    .span3
       = f.label :last_name
       = f.text_field :last_name
-    .field
+    .clearfix
+    .span3
+      = f.label :birthday
+      = f.text_field :birthday, id: 'datepicker'
+    .span3
+      = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
+    .span3
+      = f.label :photo, "Picture"
+      = f.file_field :photo
+    .clearfix
+    .span3
       = f.label :email
       = f.text_field :email
-    .field
-      = f.label :city
-      = f.text_field :city
-    .field
-      = f.input :country
-      / TODO: set country priorities
-    .field
-      = f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], item_wrapper_class: 'inline'
-    %hr
-    %h3
-      Languages I know
-    #iknow
-      - user.languages.build
-      = f.simple_fields_for :languages do |language|
-        = render 'language_fields', :f => language
-      .links
-        = link_to_add_association 'add another language', f, :languages
-    %hr
-    %h3
-      Languages I am learning
-    #iwanttoknow
-      - user.language_to_learns.build
-      = f.simple_fields_for :language_to_learns do |language|
-        = render 'language_to_learn_fields', :f => language
-      .links
-        = link_to_add_association 'add another language', f, :language_to_learns
-    %hr
-    .field
-      = f.input :birthday, as: :date, end_year: Date.today.year - 13,start_year: Date.today.year - 90,
-                              order: [:day, :month, :year]
-    .field
-      = f.label :bio, "About Me"
-      = f.text_area :bio, rows: 10
-    .field
-      = f.label :photo
-      = f.file_field :photo
-    %hr
-    %h3
-      How I'd be interested in meeting
-    .field
-      %p
-        #{image_tag('f2f_icon.png')} Face to Face
-        = f.check_box :meets_face_to_face
-    .field
-      %p
-        #{image_tag('video-chat.png')} Online
-        = f.check_box :meets_online
-    .field
-      %p
-        #{image_tag('telephone-icon.png')} Telephone
-        = f.check_box :meets_telephone
-    .field
-      = f.label :skype, "Skype Username"
-      = f.text_field :skype
-    %hr
-    .field
+    .span3
       = f.label :password
       = f.password_field :password
-    .field
+    .span3
       = f.label :password_confirmation
       = f.password_field :password_confirmation
+    .clearfix
+    %hr
+    .span6
+      %h2.pull-left
+        Languages
+    .clearfix
+    .span3
+      .clearfix
+      %p
+        I speak
+      #iknow
+        - user.languages.build
+        = f.simple_fields_for :languages do |language|
+          = render 'language_fields', :f => language
+        .links
+          = link_to_add_association 'add another language', f, :languages
+    .span3
+      %p
+        I learn
+      #iwanttoknow
+        - user.language_to_learns.build
+        = f.simple_fields_for :language_to_learns do |language|
+          = render 'language_to_learn_fields', :f => language
+        .links
+          = link_to_add_association 'add another language', f, :language_to_learns
+    .clearfix
+    %hr
+    %h2.pull-left
+      How do you wish to connect with language partners?
+    .clearfix
+    .span12
+      = link_to "Face to Face", '#', id: 'f2f', class: 'btn'
+      = link_to "Email", '#', id: 'emailbutton', class: 'btn'
+      = link_to "Skype", '#', id: 'skypebutton', class: 'btn'
+      = link_to "Facebook", '#', id: 'facebookbutton', class: 'btn'
+      = link_to "MSN", '#', id: 'msnbutton', class: 'btn'
+      #f2finfo
+        .topmargin
+          .span12
+            .postitme
+              = f.input :country
+              = f.label :city
+              = f.text_field :city
+              .clearfix
+              %p
+                #{f.check_box :meets_face_to_face, checked: false, id: 'checkerf2f'} I would like to meet face to face
+              = link_to "OK", '#', class: 'btn-success btn', id: 'f2fok'
+              = link_to "Cancel", '#', class: 'btn-danger btn', id: 'f2fcancel'
+      .clearfix
+      #emailinfo
+        .topmargin
+          .span12
+            .postitme
+              %p
+                #{f.check_box :meets_email, checked: false, id: 'checkeremail'} I would like to meet by email
+              = link_to "OK", '#', class: 'btn-success btn', id: 'emailok'
+              = link_to "Cancel", '#', class: 'btn-danger btn', id: 'emailcancel'
+      .clearfix
+      #skypeinfo
+        .topmargin
+          .span12
+            .postitme
+              = f.label :skype,  "Skype username"
+              = f.text_field :skype
+              %p
+                #{f.check_box :meets_skype, checked: false, id: 'checkerskype'} I would like to meet over Skype
+              = link_to "OK", '#', class: 'btn-success btn', id: 'skypeok'
+              = link_to "Cancel", '#', class: 'btn-danger btn', id: 'skypecancel'
+        .clearfix
+        #facebookinfo
+          .topmargin
+            .span12
+              .postitme
+                = f.label :facebook,  "Facebook username"
+                = f.text_field :facebook
+                %p
+                  #{f.check_box :meets_facebook, checked: false, id: 'checkerfacebook'} I would like to meet on Facebook
+                = link_to "OK", '#', class: 'btn-success btn', id: 'facebookok'
+                = link_to "Cancel", '#', class: 'btn-danger btn', id: 'facebookcancel'
+        .clearfix
+        #msninfo
+          .topmargin
+            .span12
+              .postitme
+                = f.label :msn,  "MSN username"
+                = f.text_field :msn
+                %p
+                  #{f.check_box :meets_msn, checked: false, id: 'checkermsn'} I would like to meet by MSN
+                = link_to "OK", '#', class: 'btn-success btn', id: 'msnok'
+                = link_to "Cancel", '#', class: 'btn-danger btn', id: 'msncancel'
+        .clearfix
+
+    .clearfix
+    %hr
+    .span6
+      %h2.pull-left
+        About Me
+    .clearfix
+    .span9
+      = f.label :bio, "About Me"
+      = f.text_area :bio, rows: 10
+    .clearfix
+    %hr
+    .span9
+      %p
+        By signing up, I accept the Language Board #{link_to "terms of service", terms_path}.
+    .clearfix
+    %hr
     .actions
-      = f.submit "Sign up", class: 'btn btn-success'
+      = f.submit "Sign up", class: 'btn btn-success btn-large'
