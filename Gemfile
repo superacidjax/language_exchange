@@ -20,6 +20,7 @@ gem 'thin'
 gem 'turbolinks'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 gem 'will_paginate'
+gem 'bootstrap-datepicker-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
